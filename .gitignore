@@ -1,0 +1,10 @@
+.gitignore
+.git/
+
+*.pyc
+*.db
+
+*~
+*.swp
+*.old
+*.bak
