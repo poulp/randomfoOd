@@ -1,0 +1,909 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE rdf:RDF [
+    <!ENTITY dcterms "http://purl.org/dc/terms/" >
+    <!ENTITY foaf "http://xmlns.com/foaf/0.1/" >
+    <!ENTITY adms "http://www.w3.org/ns/adms#" >
+    <!ENTITY vann "http://purl.org/vocab/vann/" >
+    <!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+    <!ENTITY dc "http://purl.org/dc/elements/1.1/" >
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY food "http://data.lirmm.fr/ontologies/food#" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<rdf:RDF xmlns="http://data.lirmm.fr/ontologies/food#"
+     xml:base="http://data.lirmm.fr/ontologies/food"
+     xmlns:adms="http://www.w3.org/ns/adms#"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:foaf="http://xmlns.com/foaf/0.1/"
+     xmlns:food="http://data.lirmm.fr/ontologies/food#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:vann="http://purl.org/vocab/vann/"
+     xmlns:dcterms="http://purl.org/dc/terms/">
+    <owl:Ontology rdf:about="http://data.lirmm.fr/ontologies/food">
+        <dcterms:created rdf:datatype="&xsd;date">2013-09-24</dcterms:created>
+        <dcterms:modified rdf:datatype="&xsd;date">2013-09-24</dcterms:modified>
+        <vann:preferredNamespaceUri>http://data.lirmm.fr/ontologies/food#</vann:preferredNamespaceUri>
+        <dcterms:publisher>http://data.lirmm.fr/ontologies/food#LIRMM</dcterms:publisher>
+        <vann:preferredNamespacePrefix>food</vann:preferredNamespacePrefix>
+        <dcterms:title>Food Ontology</dcterms:title>
+        <dc:license>http://creativecommons.org/licenses/by/3.0/</dc:license>
+        <dcterms:description>This ontology models the Food domain. It allows to describe ingredients and food products.</dcterms:description>
+        <dcterms:partOf rdf:resource="http://data.lirmm.fr/ontologies"/>
+        <foaf:homepage rdf:resource="http://data.lirmm.fr/ontologies/food.html"/>
+        <dc:creator rdf:resource="&food;EmmanuelNauer"/>
+        <dc:creator rdf:resource="&food;Mark"/>
+        <dc:creator rdf:resource="&food;St%C3%A9phaneGigandet"/>
+        <dc:creator rdf:resource="&food;fran%C3%A7ois"/>
+        <dcterms:type rdf:resource="http://purl.org/adms/assettype/Ontology"/>
+        <dcterms:status rdf:resource="http://purl.org/adms/status/UnderDevelopment"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#code -->
+
+    <owl:AnnotationProperty rdf:about="&food;code">
+        <rdfs:label>Identifier: usually a barcode such as EAN-13 (European Article Numbering) or UPC-A (Universal Product Code)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;FoodProduct"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#containsIngredient -->
+
+    <owl:AnnotationProperty rdf:about="&food;containsIngredient">
+        <rdfs:label>Specifies an ingredient contained in the Food object</rdfs:label>
+        <rdfs:comment>Value is an object of the class Ingredient so that we can specify the quantity, the unit, and the nature of the ingredient (string or other Food object)
+
+e.g. 1 clove of garlic -&gt; quantity = 1, unit = clove, ingredient = garlic (or Food object for garlic)</rdfs:comment>
+        <rdfs:domain rdf:resource="&food;Food"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#energyPer100g -->
+
+    <owl:AnnotationProperty rdf:about="&food;energyPer100g">
+        <rdfs:label>Nutrition data: energy (in kJ) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#food -->
+
+    <owl:AnnotationProperty rdf:about="&food;food">
+        <rdfs:label>Food that is an ingredient of another food</rdfs:label>
+        <rdfs:comment>String or Food object</rdfs:comment>
+        <rdfs:domain rdf:resource="&food;Ingredient"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#percent -->
+
+    <owl:AnnotationProperty rdf:about="&food;percent">
+        <rdfs:label>Quantity of ingredient in percentage % of the total amount of ingredients in a Food</rdfs:label>
+        <rdfs:comment>Useful in particular for food products</rdfs:comment>
+        <rdfs:domain rdf:resource="&food;Ingredient"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://purl.org/dc/terms/FileFormat -->
+
+    <owl:AnnotationProperty rdf:about="&dcterms;FileFormat"/>
+    
+
+
+    <!-- http://purl.org/dc/terms/license -->
+
+    <owl:AnnotationProperty rdf:about="&dcterms;license"/>
+    
+
+
+    <!-- http://www.w3.org/ns/adms#accessURL -->
+
+    <owl:AnnotationProperty rdf:about="&adms;accessURL"/>
+    
+
+
+    <!-- http://www.w3.org/ns/adms#status -->
+
+    <owl:AnnotationProperty rdf:about="&adms;status"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/homepage -->
+
+    <owl:AnnotationProperty rdf:about="&foaf;homepage"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/member -->
+
+    <owl:AnnotationProperty rdf:about="&foaf;member"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/name -->
+
+    <owl:AnnotationProperty rdf:about="&foaf;name"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#containsIngredient -->
+
+    <owl:ObjectProperty rdf:about="&food;containsIngredient">
+        <rdfs:label>Specifies an ingredient contained in the Food object</rdfs:label>
+        <rdfs:comment>Value is an object of the class Ingredient so that we can specify the quantity, the unit, and the nature of the ingredient (string or other Food object)
+
+e.g. 1 clove of garlic -&gt; quantity = 1, unit = clove, ingredient = garlic (or Food object for garlic)</rdfs:comment>
+        <rdfs:range rdf:resource="&food;Ingredient"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#food -->
+
+    <owl:ObjectProperty rdf:about="&food;food">
+        <rdfs:label>Food that is an ingredient of another food</rdfs:label>
+        <rdfs:comment>String or Food object</rdfs:comment>
+        <rdfs:range rdf:resource="&food;Food"/>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#bicarbonatePer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;bicarbonatePer100g">
+        <rdfs:label>Nutrition data: bicarbonate (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#biotinPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;biotinPer100g">
+        <rdfs:label>Nutrition data: biotin (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:comment>Note that biotin is also known as vitamin H or vitamin B7</rdfs:comment>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#calciumPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;calciumPer100g">
+        <rdfs:label>Nutrition data: calcium (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#carbohydratesPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;carbohydratesPer100g">
+        <rdfs:label>Nutrition data: carbohydrates (in g) per 100g (or 100ml for liquids) </rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#carbonFootprintPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;carbonFootprintPer100g">
+        <rdfs:label>Carbon foorprint (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#chloridePer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;chloridePer100g">
+        <rdfs:label>Nutrition data: chloride (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#cholesterolPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;cholesterolPer100g">
+        <rdfs:label>Nutrition data: cholesterol (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#chromiumPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;chromiumPer100g">
+        <rdfs:label>Nutrition data: chromium (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#copperPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;copperPer100g">
+        <rdfs:label>Nutrition data: copper (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#fatPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;fatPer100g">
+        <rdfs:label>Nutrition data: fat (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#fiberPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;fiberPer100g">
+        <rdfs:label>Nutrition data: fiber (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#fluoridePer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;fluoridePer100g">
+        <rdfs:label>Nutrition data: fluoride (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#ingredientListAsText -->
+
+    <owl:DatatypeProperty rdf:about="&food;ingredientListAsText">
+        <rdfs:label>Text of the list of ingredients</rdfs:label>
+        <rdfs:comment>Full text of the list of ingredients of a Food item (Product or Dish). May contain more details than what can be listed in the containsIngredient properties.</rdfs:comment>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#iodinePer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;iodinePer100g">
+        <rdfs:label>Nutrition data: iodine (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#ironPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;ironPer100g">
+        <rdfs:label>Nutrition data: ironPer100g (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#magnesiumPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;magnesiumPer100g">
+        <rdfs:label>Nutrition data: magnesium (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#manganesePer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;manganesePer100g">
+        <rdfs:label>Nutrition data: manganese (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#molybdenumPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;molybdenumPer100g">
+        <rdfs:label>Nutrition data: molybdenum (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#monounsaturatedFatPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;monounsaturatedFatPer100g">
+        <rdfs:label>Nutrition data: monounsaturated fat (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#netWeight -->
+
+    <owl:DatatypeProperty rdf:about="&food;netWeight">
+        <rdfs:label>net weight of a food product (g) </rdfs:label>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#omega3Fatper100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;omega3Fatper100g">
+        <rdfs:label>Nutrition data: omega 3 fat (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#omega6FatPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;omega6FatPer100g">
+        <rdfs:label>Nutrition data: omega 6 fat (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#pantothenicAcidPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;pantothenicAcidPer100g">
+        <rdfs:label>Nutrition data: pantothenic acid (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:comment>Note that pantothenic acid is also known as vitamin B5</rdfs:comment>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#phosphorusPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;phosphorusPer100g">
+        <rdfs:label>Nutrition data: phosphorus (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#polyolsPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;polyolsPer100g">
+        <rdfs:label>Nutrition data: polyols (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#polyunsaturatedFatPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;polyunsaturatedFatPer100g">
+        <rdfs:label>Nutrition data: polyunsaturated fat (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#potassiumPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;potassiumPer100g">
+        <rdfs:label>Nutrition data: potassium (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#proteinsPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;proteinsPer100g">
+        <rdfs:label>Nutrition data: proteins (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#quantity -->
+
+    <owl:DatatypeProperty rdf:about="&food;quantity">
+        <rdfs:label>quantity of ingredient in any unit (unit specified in unit)</rdfs:label>
+        <rdfs:comment>e.g. 1 clove of garlic -&gt; quantity = 1, unit = clove, ingredient = garlic (or Food object for garlic)</rdfs:comment>
+        <rdfs:domain rdf:resource="&food;Ingredient"/>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#rank -->
+
+    <owl:DatatypeProperty rdf:about="&food;rank">
+        <rdfs:label>Rank of an ingredient in an ingredient list ordered by quantity (e.g. food products)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Ingredient"/>
+        <rdfs:range rdf:resource="&xsd;integer"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#saltEquivalentPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;saltEquivalentPer100g">
+        <rdfs:label>Nutrition data: equivalent in salt (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#saturatedFatPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;saturatedFatPer100g">
+        <rdfs:label>Nutrition data: saturated fat (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#seleniumPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;seleniumPer100g">
+        <rdfs:label>Nutrition data: selenium (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#silicaPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;silicaPer100g">
+        <rdfs:label>Nutrition data: silica (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Dish"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#sodiumPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;sodiumPer100g">
+        <rdfs:label>Nutrition data: sodium (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#starchPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;starchPer100g">
+        <rdfs:label>Nutrition data: starch (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#sugarsPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;sugarsPer100g">
+        <rdfs:label>Nutrition data: sugars (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:range rdf:resource="&rdfs;Literal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#transFatPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;transFatPer100g">
+        <rdfs:label>Nutrition data: trans fat (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#unit -->
+
+    <owl:DatatypeProperty rdf:about="&food;unit">
+        <rdfs:label>Unit for the specified quantity</rdfs:label>
+        <rdfs:comment>e.g. 1 clove of garlic -&gt; quantity = 1, unit = clove, ingredient = garlic (or Food object for garlic)</rdfs:comment>
+        <rdfs:domain rdf:resource="&food;Ingredient"/>
+        <rdfs:range rdf:resource="&xsd;string"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#vitaminAPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;vitaminAPer100g">
+        <rdfs:label>Nutrition data: vitamin A (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#vitaminB12Per100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;vitaminB12Per100g">
+        <rdfs:label>Nutrition data: vitamin B12 (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#vitaminB1Per100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;vitaminB1Per100g">
+        <rdfs:label>Nutrition data: vitamin B1 (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:comment>Note that vitamin B1 is also known as thiamin</rdfs:comment>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#vitaminB2Per100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;vitaminB2Per100g">
+        <rdfs:label>Nutrition data: vitamin B2 (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:comment>Note that vitamin B2 is also known as riboflavin</rdfs:comment>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#vitaminB3Per100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;vitaminB3Per100g">
+        <rdfs:label>Nutrition data: vitamin B3 (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:comment>Note that vitamin B3 is also known as vitamin Pp or niacin or nicotinic acid</rdfs:comment>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#vitaminB6Per100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;vitaminB6Per100g">
+        <rdfs:label>Nutrition data: vitamin B6 (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#vitaminB9Per100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;vitaminB9Per100g">
+        <rdfs:label>Nutrition data: vitamin B9 (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:comment>Note that vitamin B9 is also known as folacin or folic acid or vitamin M</rdfs:comment>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#vitaminCPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;vitaminCPer100g">
+        <rdfs:label>Nutrition data: vitamin C (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:comment>Note that vitamin C is also known as L-ascorbic acid</rdfs:comment>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#vitaminDPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;vitaminDPer100g">
+        <rdfs:label>Nutrition data: vitamin D (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#vitaminEPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;vitaminEPer100g">
+        <rdfs:label>Nutrition data: vitamin E (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#vitaminKPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;vitaminKPer100g">
+        <rdfs:label>Nutrition data: vitamin K (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#zincPer100g -->
+
+    <owl:DatatypeProperty rdf:about="&food;zincPer100g">
+        <rdfs:label>Nutrition data: zinc (in g) per 100g (or 100ml for liquids)</rdfs:label>
+        <rdfs:domain rdf:resource="&food;Food"/>
+        <rdfs:range rdf:resource="&xsd;decimal"/>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#Dish -->
+
+    <owl:Class rdf:about="&food;Dish">
+        <rdfs:label>A dish is a food item with a recipe</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&food;Food"/>
+    </owl:Class>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#Food -->
+
+    <owl:Class rdf:about="&food;Food">
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+    </owl:Class>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#FoodProduct -->
+
+    <owl:Class rdf:about="&food;FoodProduct">
+        <rdfs:label>A manufactured food product</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&food;Food"/>
+    </owl:Class>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#Ingredient -->
+
+    <owl:Class rdf:about="&food;Ingredient">
+        <rdfs:comment>Represents an ingredient line in a recipe (for a Dish) or an ingredient listed in the ingredient list (for a Product).
+
+We need to specify a quantity and unit, so the relation is not binary. So the value for the containsIngredient property of a Food object is an object of the IngredientAmount class (instead of a Food object or string directly). See http://www.w3.org/TR/swbp-n-aryRelations/ for details.</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#NutritionData -->
+
+    <owl:Class rdf:about="&food;NutritionData"/>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#Recipe -->
+
+    <owl:Class rdf:about="&food;Recipe">
+        <rdfs:label>Recipe</rdfs:label>
+        <rdfs:subClassOf rdf:resource="&owl;Thing"/>
+        <rdfs:comment>A recipe as a set of ingredients together with the protocol to prepare the resulting food</rdfs:comment>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/dc/terms/Agent -->
+
+    <owl:Class rdf:about="&dcterms;Agent"/>
+    
+
+
+    <!-- http://www.w3.org/ns/adms#SemanticAsset -->
+
+    <owl:Class rdf:about="&adms;SemanticAsset"/>
+    
+
+
+    <!-- http://www.w3.org/ns/adms#SemanticDistribution -->
+
+    <owl:Class rdf:about="&adms;SemanticDistribution"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Person -->
+
+    <owl:Class rdf:about="&foaf;Person"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food -->
+
+    <owl:NamedIndividual rdf:about="http://data.lirmm.fr/ontologies/food">
+        <rdf:type rdf:resource="&adms;SemanticAsset"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#EmmanuelNauer -->
+
+    <owl:NamedIndividual rdf:about="&food;EmmanuelNauer">
+        <rdf:type rdf:resource="&foaf;Person"/>
+        <foaf:name>Emmanuel Nauer</foaf:name>
+        <foaf:homepage></foaf:homepage>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#LIRMM -->
+
+    <owl:NamedIndividual rdf:about="&food;LIRMM">
+        <rdf:type rdf:resource="&dcterms;Agent"/>
+        <foaf:name>LIRMM</foaf:name>
+        <foaf:homepage rdf:resource="http://www.lirmm.fr"/>
+        <foaf:member rdf:resource="&food;fran%C3%A7ois"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#Mark -->
+
+    <owl:NamedIndividual rdf:about="&food;Mark">
+        <rdf:type rdf:resource="&foaf;Person"/>
+        <foaf:homepage></foaf:homepage>
+        <foaf:name>Mark Harrison</foaf:name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#St%C3%A9phaneGigandet -->
+
+    <owl:NamedIndividual rdf:about="&food;St%C3%A9phaneGigandet">
+        <rdf:type rdf:resource="&foaf;Person"/>
+        <foaf:homepage></foaf:homepage>
+        <foaf:name>Stéphane Gigandet</foaf:name>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#fran%C3%A7ois -->
+
+    <owl:NamedIndividual rdf:about="&food;fran%C3%A7ois">
+        <rdf:type rdf:resource="&foaf;Person"/>
+        <foaf:name>François Scharffe</foaf:name>
+        <foaf:homepage rdf:resource="http://www.scharffe.fr"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#rdf -->
+
+    <owl:NamedIndividual rdf:about="&food;rdf">
+        <rdf:type rdf:resource="&adms;SemanticDistribution"/>
+        <adms:accessURL>http://data.lirmm.fr/ontologies/food.rdf</adms:accessURL>
+        <dcterms:FileFormat></dcterms:FileFormat>
+        <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/3.0/"/>
+        <adms:status rdf:resource="http://purl.org/adms/status/Completed"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://data.lirmm.fr/ontologies/food#ttl -->
+
+    <owl:NamedIndividual rdf:about="&food;ttl">
+        <rdf:type rdf:resource="&adms;SemanticDistribution"/>
+        <adms:accessURL>http://data.lirmm.fr/ontologies/food.ttl</adms:accessURL>
+        <dcterms:FileFormat></dcterms:FileFormat>
+        <dcterms:license rdf:resource="http://creativecommons.org/licenses/by/3.0/"/>
+        <adms:status rdf:resource="http://purl.org/adms/status/Completed"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="&food;vitaminPpPer100g">
+        <rdfs:label>vitaminPpPer100g</rdfs:label>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+
