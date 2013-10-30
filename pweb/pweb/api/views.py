@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -26,11 +29,13 @@ def get_all_person(request):
     """,
     initNs={ "foaf":FOAF })
 
+    print request.META["CONTENT_TYPE"]
+
     # petite negociation de contenu
     if request.META["CONTENT_TYPE"] == "application/json":
-        return HttpResponse(res.serialize(format='json'),content_type="application/json")
-    if request.META["CONTENT_TYPE"] == "text/xml":
-        return HttpResponse(res.serialize(format='xml'),content_type="text/xml")
+        return HttpResponse(res.serialize(format='json'), content_type="application/json")
+    if request.META["CONTENT_TYPE"] == "application/xml":
+        return HttpResponse(res.serialize(format='xml'), content_type="application/xml")
     return HttpResponse("Aucune Negociation de contenu")
 
 # pour virer la vérification csrf
@@ -58,5 +63,5 @@ def add_person(request):
         # on sauve le graphe ( pour l'instant directement dans le fichier)
         g.serialize('pweb/api/rdf/pers.xml',format='xml')
 
-        return HttpResponse(g.serialize(format='xml'),content_type="text/xml")
+        return HttpResponse(g.serialize(format='xml'), content_type="application/xml")
     return HttpResponse(status=404)
