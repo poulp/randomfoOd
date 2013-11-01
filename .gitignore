@@ -1,5 +1,8 @@
 .gitignore
 .git/
+.idea/
+
+TODO
 
 *.pyc
 *.db
