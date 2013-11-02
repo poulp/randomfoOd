@@ -18,31 +18,30 @@ class Ingredient(rdfSubject):
     label = rdfSingle(rdfs.label)
     quantity = rdfSingle(food.quantity, 0)
     unit = rdfSingle(food.unit)
-    img = rdfSingle(food.img)
-    # petits doutes pour les deux suivants
-    plural = rdfSingle(food.plural) 
-    gender = rdfSingle(food.gender)
+    img = rdfSingle(rdfs.Literal,'')
+    plural = rdfSingle(rdfs.Literal,'plural')
+    gender = rdfSingle(rdfs.Literal, 'gender')
     
 class Action(rdfSubject):
-  rdf_type = food.Action
-  label = rdfSingle(rdfs.label)
-  verb = rdfSingle(food.verb)
+    # rdf_type = 
+    label = rdfSingle(rdfs.label)
+    verb = rdfSingle(rdfs.Literal,'Action')
   
 	
 class Utensil(rdfSubject):
-  rdf_type = food.Utensil
-  label = rdfSingle(rdfs.label) 
+    # rdf_type =
+    label = rdfSingle(rdfs.label)
 
 
 class Transformation(rdfSubject):
-  rdf_type = food.Transformation
-  label = rdfSingle(rdfs.label) 
+    rdf_type = food.Ingredient # because we get a new ingredient after a transformation
+    label = rdfSingle(rdfs.label)
 
   
 class Recipe(rdfSubject):
-  rdf_type = food.Recipe
-  label = rdfSingle(rdfs.label)
-  personNb = rdfSingle(rdfs.Literal, 1)
-  ingredients = rdfMultiple(food.Ingredient)
-  utensils = rdfMultiple(food.Utensil)
-  transformations = rdfMultiple(food.Transformation)
+    rdf_type = food.Recipe
+    label = rdfSingle(rdfs.label)
+    personNb = rdfSingle(rdfs.Literal, 1)
+    ingredients = rdfMultiple(food.Ingredient)
+    #utensils = rdfMultiple()
+    #transformations = rdfMultiple()
