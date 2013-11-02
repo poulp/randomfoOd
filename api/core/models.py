@@ -20,29 +20,30 @@ class Ingredient(rdfSubject):
     unit = rdfSingle(food.unit)
     img = rdfSingle(food.img)
     # petits doutes pour les deux suivants
-    plural = rdfSingle(food.plural) 
+    plural = rdfSingle(food.plural)
     gender = rdfSingle(food.gender)
-    
+
+
 class Action(rdfSubject):
-  rdf_type = food.Action
-  label = rdfSingle(rdfs.label)
-  verb = rdfSingle(food.verb)
-  
-	
+    rdf_type = food.Action
+    label = rdfSingle(rdfs.label)
+    verb = rdfSingle(food.verb)
+
+
 class Utensil(rdfSubject):
-  rdf_type = food.Utensil
-  label = rdfSingle(rdfs.label) 
+    rdf_type = food.Utensil
+    label = rdfSingle(rdfs.label)
 
 
 class Transformation(rdfSubject):
-  rdf_type = food.Transformation
-  label = rdfSingle(rdfs.label) 
+    rdf_type = food.Transformation
+    label = rdfSingle(rdfs.label)
 
-  
+
 class Recipe(rdfSubject):
-  rdf_type = food.Recipe
-  label = rdfSingle(rdfs.label)
-  personNb = rdfSingle(rdfs.Literal, 1)
-  ingredients = rdfMultiple(food.Ingredient)
-  utensils = rdfMultiple(food.Utensil)
-  transformations = rdfMultiple(food.Transformation)
+    rdf_type = food.Recipe
+    label = rdfSingle(rdfs.label)
+    personNb = rdfSingle(rdfs.Literal, 1)
+    ingredients = rdfMultiple(food.Ingredient)
+    utensils = rdfMultiple(food.Utensil)
+    transformations = rdfMultiple(food.Transformation)
