@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from random import randint
+from random import randint, choice
 
 from rdfalchemy.sparql import SPARQLGraph
 
@@ -45,4 +45,13 @@ class IngredientGenerator(object):
 
         raw_result = list(Endpoints.query(endpoint, cls.query.format(**parameters)))
 
-        return [Ingredient(label=r[0]) for r in raw_result]
+        return [Ingredient(label=r[0], quantity=randint(1, 30000), unit=UnitGenerator.generate()) for r in raw_result]
+
+class UnitGenerator(object):
+    # TODO : extraire les unités d'une autre source, voir http://purl.obolibrary.org/obo/uo.owl
+
+    units = ('mg', 'kg', 'poignée', 'pincée', 'litre')
+
+    @classmethod
+    def generate(cls):
+        return choice(cls.units)
