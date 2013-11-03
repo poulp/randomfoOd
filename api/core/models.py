@@ -9,15 +9,15 @@ from rdfalchemy.rdfSubject import rdfSubject
 from api.core.sparql_constants import NAMESPACES
 
 
-rdfs = Namespace(NAMESPACES['rdfs'])
+rdf = Namespace(NAMESPACES['rdf'])
 food = Namespace(NAMESPACES['food'])
 manjezan = Namespace(NAMESPACES['manjezan'])
 
 
 class Ingredient(rdfSubject):
     rdf_type = food.Ingredient
-    label = rdfSingle(rdfs.label)
-    quantity = rdfSingle(food.quantity, 0)
+    label = rdfSingle(rdf.label)
+    quantity = rdfSingle(food.quantity)
     unit = rdfSingle(food.unit)
     # plural = rdfSingle(food.plural)
     # gender = rdfSingle(food.gender)
@@ -25,24 +25,26 @@ class Ingredient(rdfSubject):
 
 class Action(rdfSubject):
     rdf_type = manjezan.Action
-    label = rdfSingle(rdfs.label)
-    verb = rdfSingle(food.verb)
+    label = rdfSingle(rdf.label)
+    verb = rdfSingle(rdf.Literal, 'Action')
 
 
 class Utensil(rdfSubject):
     rdf_type = food.Utensil
-    label = rdfSingle(rdfs.label)
+    img = rdfSingle(rdf.Literal, '')
+    plural = rdfSingle(rdf.Literal, 'plural')
+    gender = rdfSingle(rdf.Literal, 'gender')
 
 
 class Transformation(rdfSubject):
-    rdf_type = food.Transformation
-    label = rdfSingle(rdfs.label)
+    rdf_type = food.Ingredient  # because we get a new ingredient after a transformation
+    label = rdfSingle(rdf.label)
 
 
 class Recipe(rdfSubject):
     rdf_type = food.Recipe
-    label = rdfSingle(rdfs.label)
-    personNb = rdfSingle(rdfs.Literal, 1)
+    label = rdfSingle(rdf.label)
+    personNb = rdfSingle(rdf.Literal, 1)
     ingredients = rdfMultiple(food.Ingredient)
-    utensils = rdfMultiple(food.Utensil)
-    transformations = rdfMultiple(food.Transformation)
+    # utensils = rdfMultiple()
+    # transformations = rdfMultiple()

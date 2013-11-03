@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:nodeID="N675b067c6acd4043b95f3eb2f3a9eb77">
+    <rdfs:label>cuicui</rdfs:label>
+    <rdf:type rdf:resource="http://www.manjezan.com/ontology/Action"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N39a9bbe21d7f40d2a759627232018691">
+    <rdf:type rdf:resource="http://www.manjezan.com/ontology/Action"/>
+    <rdfs:label>cuillere</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfd8051295e6a4ecabd2ef73e2df7d174">
+    <rdfs:label>cuicui</rdfs:label>
+    <rdf:type rdf:resource="http://www.manjezan.com/ontology/Action"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nb5429b270c95448b9a777e7ea9579bcc">
+    <rdf:type rdf:resource="http://www.manjezan.com/ontology/Action"/>
+    <rdfs:label>cuillere</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne977e5abc08c4bf88cd605ce4c5e8244">
+    <rdf:type rdf:resource="http://www.manjezan.com/ontology/Action"/>
+    <rdfs:label>cuicui</rdfs:label>
+  </rdf:Description>
+</rdf:RDF>
