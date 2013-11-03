@@ -11,6 +11,7 @@ from api.core.sparql_constants import NAMESPACES
 
 rdfs = Namespace(NAMESPACES['rdfs'])
 food = Namespace(NAMESPACES['food'])
+manjezan = Namespace(NAMESPACES['manjezan'])
 
 
 class Ingredient(rdfSubject):
@@ -18,14 +19,12 @@ class Ingredient(rdfSubject):
     label = rdfSingle(rdfs.label)
     quantity = rdfSingle(food.quantity, 0)
     unit = rdfSingle(food.unit)
-    img = rdfSingle(food.img)
-    # petits doutes pour les deux suivants
-    plural = rdfSingle(food.plural)
-    gender = rdfSingle(food.gender)
+    # plural = rdfSingle(food.plural)
+    # gender = rdfSingle(food.gender)
 
 
 class Action(rdfSubject):
-    rdf_type = food.Action
+    rdf_type = manjezan.Action
     label = rdfSingle(rdfs.label)
     verb = rdfSingle(food.verb)
 
