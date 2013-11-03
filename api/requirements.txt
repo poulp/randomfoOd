@@ -1,0 +1,3 @@
+Flask==0.10.1
+Flask-Negotiate==0.1.0
+RDFAlchemy==0.2.9
