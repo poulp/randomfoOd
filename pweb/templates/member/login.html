@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block navbar %}{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background-color: #eee;
+    }
+</style>
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+<div class="container">
+    <form class="form-signin" method="post" action="{% url 'django.contrib.auth.views.login' %}">
+    <h2 class="form-signin-heading">Connexion</h2>
+        {% csrf_token %}
+        {{ form.username }}
+        {{ form.password }}
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit"/>Se connecter</button>
+        <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+</div>
+{% endblock %}
