@@ -3,13 +3,11 @@
 
 from flask import request
 from flask_negotiate import produces, consumes
-from rdflib import Graph
-from rdflib.term import URIRef
 
-from api.core.generators import IngredientGenerator
-from api.core.models import Action
-from api.core.sparql_constants import STORE_FILE
-from api.core import app
+from generators import IngredientGenerator
+from models import Action
+from sparql_constants import STORE_FILE
+from . import app
 
 prefix = '/api/v1'
 rdf_xml = 'application/rdf+xml'

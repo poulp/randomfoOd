@@ -5,8 +5,8 @@ from random import randint, choice
 
 from rdfalchemy.sparql import SPARQLGraph
 
-from api.core.sparql_constants import NAMESPACES, SPARQL_ENDPOINTS
-from api.core.models import Ingredient
+from sparql_constants import NAMESPACES, SPARQL_ENDPOINTS
+from models import Ingredient
 
 
 class Endpoints(object):

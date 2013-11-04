@@ -163,3 +163,6 @@ LOGGING = {
         },
     }
 }
+
+LOGIN_URL = "/member/login"
+LOGIN_REDIRECT_URL = "/"
