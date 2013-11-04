@@ -9,7 +9,8 @@
 
 <body>
     {% block navbar %}
-    <div class="navbar navbar-default navbar-fixed-top">
+    
+    <div class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -17,11 +18,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Random FoOd</a>
+                <a class="navbar-brand" href="{% url "home" %}">Random FoOd</a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Accueil</a></li>
+                    <li class=""><a href="{% url "home" %}">Accueil</a></li>
+                    <li class=""><a href="{% url "home_recette" %}">Recette</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% if user.is_authenticated %}
@@ -29,9 +31,6 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ user.username }} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="/member/logout">Déconnexion</a></li>
-                            <li class="divider"></li>
-                            <li class="dropdown-header">Actions</li>
-                            <li><a href="#">One more separated link</a></li>
                         </ul>
                         </li>
                     {% else %}
@@ -46,6 +45,17 @@
 {% block content %}{% endblock %}
 <script src="https://code.jquery.com/jquery.js"></script>
 <script src="{% static "js/bootstrap.min.js" %}"></script>
+<script type="text/javascript">
+    var url = window.location;
+    // Will only work if string in href matches with location
+    $('ul.nav a[href="'+ url +'"]').parent().addClass('active');
+
+    // Will also work for relative and absolute hrefs
+    $('ul.nav a').filter(function() {
+        return this.href == url;
+    }).parent().addClass('active');
+</script>
+
 </body>
 
 </html>

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from rdfalchemy.sparql import SPARQLGraph
-from api.core.sparql_constants import NAMESPACES, SPARQL_ENDPOINTS
+from sparql_constants import NAMESPACES, SPARQL_ENDPOINTS
 
 
 class IngredientGenerator(object):

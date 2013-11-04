@@ -5,10 +5,9 @@ from flask import request, jsonify
 from flask_negotiate import produces
 
 from generators import IngredientGenerator
-from api.core import app
+from core import app
 
 prefix = '/api/v1'
-print "ohéohé"
 
 @app.route(prefix + '/gen/ingredients/<int:number>', methods=['GET'])
 @produces('application/json')

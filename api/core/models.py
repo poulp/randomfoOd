@@ -6,7 +6,7 @@ from rdflib import Namespace
 from rdfalchemy import rdfSingle, rdfMultiple
 from rdfalchemy.rdfSubject import rdfSubject
 
-from api.core.sparql_constants import NAMESPACES
+from sparql_constants import NAMESPACES
 
 
 rdfs = Namespace(NAMESPACES['rdfs'])

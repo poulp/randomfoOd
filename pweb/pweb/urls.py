@@ -10,8 +10,8 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'pweb.views.home', name='home'),
-    url(r'^api/', include('pweb.api.urls')),
     url(r'^member/', include('pweb.member.urls')),
+    url(r'^recette/', include('pweb.recette.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
