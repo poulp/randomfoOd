@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:ns1="http://data.lirmm.fr/ontologies/food#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:nodeID="Na60bcd7f8f654aba99e75396c8dae5a8">
+    <rdfs:label xml:lang="fr">sport</rdfs:label>
+    <rdf:type rdf:resource="http://data.lirmm.fr/ontologies/food#Ingredient"/>
+    <ns1:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">192</ns1:quantity>
+    <ns1:unit>paquets</ns1:unit>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N5b527b0d7d2f457e860965cd1341b7d0">
+    <rdf:type rdf:resource="http://www.manjezan.com/ontology/Action"/>
+    <rdfs:label>the_action_1</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8e50af41c60f4c52a7f3e7adcaf9438f">
+    <rdf:type rdf:resource="http://data.lirmm.fr/ontologies/food#Ingredient"/>
+    <ns1:unit>kg</ns1:unit>
+    <ns1:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">86</ns1:quantity>
+    <rdfs:label xml:lang="fr">amele</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd79c650746c94efeb4ae1f6c87db3c93">
+    <ns1:unit>kg</ns1:unit>
+    <rdf:type rdf:resource="http://data.lirmm.fr/ontologies/food#Ingredient"/>
+    <ns1:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">36</ns1:quantity>
+    <rdfs:label xml:lang="fr">pÃ©trodiÃ©sel</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfead56f82e55412380a9f39ac45940a5">
+    <rdf:type rdf:resource="http://www.manjezan.com/ontology/Action"/>
+    <rdfs:label>the_action_1</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne9019679dbb446f49e21f2103811df9f">
+    <ns1:unit>litres</ns1:unit>
+    <ns1:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">197</ns1:quantity>
+    <rdfs:label xml:lang="fr">neveu</rdfs:label>
+    <rdf:type rdf:resource="http://data.lirmm.fr/ontologies/food#Ingredient"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nfe8daeea76d743899764391b72b2f753">
+    <rdf:type rdf:resource="http://data.lirmm.fr/ontologies/food#Ingredient"/>
+    <rdfs:label xml:lang="fr">loch</rdfs:label>
+    <ns1:unit>hectolitres</ns1:unit>
+    <ns1:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">190</ns1:quantity>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N8e84be35f5b745ec8d181f1f0f609e27">
+    <ns1:unit>kg</ns1:unit>
+    <rdf:type rdf:resource="http://data.lirmm.fr/ontologies/food#Ingredient"/>
+    <ns1:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">199</ns1:quantity>
+    <rdfs:label xml:lang="fr">loc'h</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nea73ac8ad38d4bfcbd3a34b412112d36">
+    <ns1:unit>paquets</ns1:unit>
+    <ns1:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">114</ns1:quantity>
+    <rdf:type rdf:resource="http://data.lirmm.fr/ontologies/food#Ingredient"/>
+    <rdfs:label xml:lang="fr">slip</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nd99ad6043714497a9cc4cf751eb4b729">
+    <ns1:unit>mm</ns1:unit>
+    <rdfs:label xml:lang="fr">ciste</rdfs:label>
+    <rdf:type rdf:resource="http://data.lirmm.fr/ontologies/food#Ingredient"/>
+    <ns1:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">65</ns1:quantity>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N047c62787c4042109fb050acd7d9b58d">
+    <ns1:unit>poignée</ns1:unit>
+    <ns1:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">37</ns1:quantity>
+    <rdf:type rdf:resource="http://data.lirmm.fr/ontologies/food#Ingredient"/>
+    <rdfs:label xml:lang="fr">alan</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf935189d9dc44b21ad275c4de36e0a48">
+    <ns1:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">65</ns1:quantity>
+    <rdfs:label xml:lang="fr">alim</rdfs:label>
+    <ns1:unit>mm</ns1:unit>
+    <rdf:type rdf:resource="http://data.lirmm.fr/ontologies/food#Ingredient"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nf026f168f7f047ec9a04f8e3c3373b26">
+    <rdf:type rdf:resource="http://www.manjezan.com/ontology/Action"/>
+    <rdfs:label>cuicui</rdfs:label>
+  </rdf:Description>
+</rdf:RDF>
