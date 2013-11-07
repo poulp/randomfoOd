@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import request, jsonify
-from flask_negotiate import produces
+from flask_negotiate import produces, consumes
 
 from generators import IngredientGenerator
 from core import app
