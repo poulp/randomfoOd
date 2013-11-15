@@ -24,6 +24,14 @@ def get_ingredients(number):
     return rdfSubject.db.serialize(format=RDF_XML)
 
 
+@app.route(PREFIX + '/recipe/gen', methods=['GET'])
+@produces('application/xml')
+def get_recipe():
+    rdfSubject.db = ConjunctiveGraph()
+    RecipeGenerator.generate()
+    return rdfSubject.db.serialize(format=RDF_XML)
+
+
 @app.route(PREFIX + '/action/add', methods=['POST'])
 @consumes('application/json')
 def add_action():
@@ -32,11 +40,3 @@ def add_action():
     a.db.load(STORE_FILE, format=RDF_XML)
     a.db.serialize(STORE_FILE, format=RDF_XML)
     return ''
-
-
-@app.route(PREFIX + '/recipe/gen', methods=['GET'])
-@produces('application/xml')
-def get_recipe():
-    rdfSubject.db = ConjunctiveGraph()
-    RecipeGenerator.generate()
-    return rdfSubject.db.serialize(format=RDF_XML)
