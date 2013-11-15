@@ -6,7 +6,7 @@ from random import randint, choice
 from rdfalchemy.sparql import SPARQLGraph
 
 from sparql_constants import NAMESPACES, SPARQL_ENDPOINTS
-from models import Ingredient
+from models import Ingredient, Recipe
 
 
 class Endpoints(object):
@@ -52,3 +52,14 @@ class UnitGenerator(object):
     @classmethod
     def generate(cls):
         return choice(cls.units)
+
+
+class RecipeGenerator(object):
+
+    @classmethod
+    def generate(cls):
+        n = randint(1, 1000)
+        i = IngredientGenerator.generate(randint(5, 15))
+        # utensils
+        # actions
+        return Recipe(person_nb=n, ingredients=i)

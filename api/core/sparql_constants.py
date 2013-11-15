@@ -6,7 +6,7 @@ NAMESPACES = {
     'monnet':       'http://www.monnet-project.eu/lemon#',
     'wiki-terms':   'http://wiktionary.dbpedia.org/terms/',
     'food':         'http://data.lirmm.fr/ontologies/food#',
-    'manjezan':     'http://www.manjezan.com/ontology/'
+    'random_food':  'http://www.random_food.com/ontology/'
 }
 
 SPARQL_ENDPOINTS = {

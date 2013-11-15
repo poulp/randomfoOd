@@ -11,7 +11,7 @@ from sparql_constants import NAMESPACES
 
 rdf = Namespace(NAMESPACES['rdf'])
 food = Namespace(NAMESPACES['food'])
-manjezan = Namespace(NAMESPACES['manjezan'])
+random_food = Namespace(NAMESPACES['random_food'])
 
 
 class Ingredient(rdfSubject):
@@ -19,32 +19,26 @@ class Ingredient(rdfSubject):
     label = rdfSingle(rdf.label)
     quantity = rdfSingle(food.quantity)
     unit = rdfSingle(food.unit)
-    # plural = rdfSingle(food.plural)
-    # gender = rdfSingle(food.gender)
 
 
 class Action(rdfSubject):
-    rdf_type = manjezan.Action
+    rdf_type = random_food.Action
     label = rdfSingle(rdf.label)
-    verb = rdfSingle(rdf.Literal, 'Action')
 
 
 class Utensil(rdfSubject):
-    rdf_type = food.Utensil
-    img = rdfSingle(rdf.Literal, '')
-    plural = rdfSingle(rdf.Literal, 'plural')
-    gender = rdfSingle(rdf.Literal, 'gender')
+    rdf_type = random_food.Utensil
+    label = rdfSingle(rdf.label)
 
 
 class Transformation(rdfSubject):
-    rdf_type = food.Ingredient  # because we get a new ingredient after a transformation
+    rdf_type = random_food.Transformation
     label = rdfSingle(rdf.label)
 
 
 class Recipe(rdfSubject):
     rdf_type = food.Recipe
-    label = rdfSingle(rdf.label)
-    personNb = rdfSingle(rdf.Literal, 1)
+    person_nb = rdfSingle(rdf.Literal)
     ingredients = rdfMultiple(food.Ingredient)
     # utensils = rdfMultiple()
     # transformations = rdfMultiple()
