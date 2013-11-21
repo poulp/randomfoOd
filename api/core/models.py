@@ -6,7 +6,7 @@ from rdflib import Namespace
 from rdfalchemy import rdfSingle, rdfMultiple
 from rdfalchemy.rdfSubject import rdfSubject
 
-from sparql_constants import NAMESPACES
+from constants import NAMESPACES
 
 
 rdf = Namespace(NAMESPACES['rdf'])
@@ -40,5 +40,5 @@ class Recipe(rdfSubject):
     rdf_type = food.Recipe
     person_nb = rdfSingle(rdf.Literal)
     ingredients = rdfMultiple(food.Ingredient)
-    # utensils = rdfMultiple()
+    utensils = rdfMultiple(random_food.Utensil)
     # transformations = rdfMultiple()
