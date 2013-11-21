@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.random-food.com/utensil#couteau_a_cran_d'arret_d'urgence">
+    <rdfs:label>Couteau à cran d'arrêt d'urgence</rdfs:label>
+    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random_food.com/utensils#fourchette">
+    <rdf:type rdf:resource="http://www.random_food.com/ontology#Utensil"/>
+    <rdfs:label>fourchette</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random_food.com/utensils#Sacdecouchage">
+    <rdf:type rdf:resource="http://www.random_food.com/ontology#Utensil"/>
+    <rdfs:label>Sac de couchage</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random_food.com/utensils#Couteauàbeurre">
+    <rdf:type rdf:resource="http://www.random_food.com/ontology#Utensil"/>
+    <rdfs:label>Couteau à beurre</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random-food.com/utensil#couteau_a_cran_darret_durgence">
+    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
+    <rdfs:label>Couteau à cran d'arrêt d'urgence</rdfs:label>
+  </rdf:Description>
+</rdf:RDF>

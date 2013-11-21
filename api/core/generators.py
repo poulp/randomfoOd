@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from random import randint, choice
+from random import randint, choice, sample
 
+from rdflib import URIRef
+from rdfalchemy.rdfsSubject import rdfSubject
 from rdfalchemy.sparql import SPARQLGraph
 
-from sparql_constants import NAMESPACES, SPARQL_ENDPOINTS
+from constants import NAMESPACES, SPARQL_ENDPOINTS, UTENSILS_FILE, RDF_XML, BASE_URI_RECIPE
 from models import Ingredient, Recipe
 
 
@@ -54,12 +56,26 @@ class UnitGenerator(object):
         return choice(cls.units)
 
 
-class RecipeGenerator(object):
+class UtensilGenerator(object):
+    """
+    Récupère quelques ustensiles de la base de données.
+    """
 
+    @classmethod
+    def generate(cls, number):
+        rdfSubject.db.load(UTENSILS_FILE, format=RDF_XML)
+        return sample(rdfSubject.db.all_nodes(), number)
+
+
+class RecipeGenerator(object):
+    """
+    Génère une recette complète en mixant tous les autres générateurs.
+    """
     @classmethod
     def generate(cls):
         n = randint(1, 1000)
         i = IngredientGenerator.generate(randint(5, 15))
+        u = UtensilGenerator.generate(randint(3, 8))
         # utensils
         # actions
-        return Recipe(person_nb=n, ingredients=i)
+        return Recipe(resUri=URIRef(BASE_URI_RECIPE), person_nb=n, ingredients=i, utensils=u)
