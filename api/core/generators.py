@@ -42,7 +42,10 @@ class IngredientGenerator(object):
     def generate(cls, number):
         parameters = {'offset': randint(0, 10000), 'number': number}
         raw_result = list(Endpoints.query(cls.endpoint, cls.query.format(**parameters)))
-        return [Ingredient(label=r[0], quantity=randint(1, 200), unit=UnitGenerator.generate()) for r in raw_result]
+
+        return [Ingredient(label=r[0],
+                           quantity=randint(1, 200),
+                           unit=UnitGenerator.generate()) for r in raw_result]
 
 
 class UnitGenerator(object):
@@ -62,6 +65,7 @@ class UtensilGenerator(object):
     @classmethod
     def generate(cls, number):
         load_rdf_file(STORE['utensils'])
+        number %= len(rdfSubject.db.all_nodes())
         return sample(rdfSubject.db.all_nodes(), number)
 
 

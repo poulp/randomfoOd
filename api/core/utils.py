@@ -19,7 +19,6 @@ def use_graph(fn):
     return wrapper
 
 
-@use_graph
 def load_rdf_file(file_name):
     from xml.sax._exceptions import SAXParseException
 
@@ -28,6 +27,7 @@ def load_rdf_file(file_name):
         rdfSubject.db.load(file_name, format=RDF_XML)
     except SAXParseException:
         # Si le fichier est vide on y sauve un graphe vide.
+        rdfSubject.db = ConjunctiveGraph()
         rdfSubject.db.serialize(destination=file_name, format=RDF_XML)
 
 
