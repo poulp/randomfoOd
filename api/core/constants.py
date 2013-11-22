@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 RDF_XML = 'application/rdf+xml'
+XML = 'application/xml'
+JSON = 'application/json'
 
 BASE_URI = 'http://www.random-food.com/'
 BASE_URI_UTENSIL = BASE_URI + 'utensil#'

@@ -1,4 +1,4 @@
-# Projet Web Master 2
+# Random recipe generator
 
 ## Installation
 
@@ -14,9 +14,14 @@ Pour créer l'environnement :
     $ mkvirtualenv pweb-env --python=python2.7
 
 ### 3. Installer les prérequis et configurer
-    
+#### 3.1. Pour l'api
     $ workon pweb-env
-    $ cd projetwebm2/pweb
+    $ cd api
+    $ pip install -r req.txt
+
+#### 3.2. Pour l'app
+    $ workon pweb-env
+    $ cd pweb
     $ pip install -r req.txt
     $ ./manage.py syncdb
     $ ./manage.py migrate
@@ -24,9 +29,12 @@ Pour créer l'environnement :
 
 ## Mise en route
 
-Lancer le serveur
+### 1. Lancer l'api
+    $ python api/runserver.py
 
-    ./manage.py runserver
+### 2. Lancer l'app
+    $ cd pweb
+    $ ./manage.py runserver
 
 
-Aller à l'adresse [http://localhost:8000](http://localhost:8000)
+Aller à l'adresse [http://localhost:8000](http://localhost:8000) et régalez vous.
