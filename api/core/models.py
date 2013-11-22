@@ -4,41 +4,40 @@
 from rdflib import Namespace
 
 from rdfalchemy import rdfSingle, rdfMultiple
-from rdfalchemy.rdfSubject import rdfSubject
+from rdfalchemy import rdfSubject, RDFS
 
 from constants import NAMESPACES
 
-
-rdf = Namespace(NAMESPACES['rdf'])
-food = Namespace(NAMESPACES['food'])
-random_food = Namespace(NAMESPACES['random_food'])
+FOOD = Namespace(NAMESPACES['food'])
+RANDOM_FOOD = Namespace(NAMESPACES['random_food'])
 
 
 class Ingredient(rdfSubject):
-    rdf_type = food.Ingredient
-    label = rdfSingle(rdf.label)
-    quantity = rdfSingle(food.quantity)
-    unit = rdfSingle(food.unit)
+    rdf_type = FOOD.Ingredient
+    label = rdfSingle(RDFS.label)
+    quantity = rdfSingle(FOOD.quantity)
+    unit = rdfSingle(FOOD.unit)
 
 
 class Action(rdfSubject):
-    rdf_type = random_food.Action
-    label = rdfSingle(rdf.label)
+    rdf_type = RANDOM_FOOD.Action
+    label = rdfSingle(RDFS.label)
 
 
 class Utensil(rdfSubject):
-    rdf_type = random_food.Utensil
-    label = rdfSingle(rdf.label)
+    rdf_type = RANDOM_FOOD.Utensil
+    label = rdfSingle(RDFS.label)
+    actions = rdfMultiple(RANDOM_FOOD.Action)
 
 
 class Transformation(rdfSubject):
-    rdf_type = random_food.Transformation
-    label = rdfSingle(rdf.label)
+    rdf_type = RANDOM_FOOD.Transformation
+    label = rdfSingle(RDFS.label)
 
 
 class Recipe(rdfSubject):
-    rdf_type = food.Recipe
-    person_nb = rdfSingle(rdf.Literal)
-    ingredients = rdfMultiple(food.Ingredient)
-    utensils = rdfMultiple(random_food.Utensil)
+    rdf_type = FOOD.Recipe
+    person_nb = rdfSingle(RANDOM_FOOD.nb_person)
+    ingredients = rdfMultiple(FOOD.Ingredient)
+    utensils = rdfMultiple(RANDOM_FOOD.Utensil)
     # transformations = rdfMultiple()
