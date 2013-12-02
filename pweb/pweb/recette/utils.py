@@ -4,7 +4,7 @@ import urllib2
 from rdflib import Graph, Namespace
 from rdflib.namespace import RDF, RDFS
 from random import choice
-
+from syntax import link_title_recipe
 
 NS1 = Namespace('http://www.random-food.com/ontology#')
 LIRMM = Namespace('http://data.lirmm.fr/ontologies/food#')
@@ -55,9 +55,7 @@ class Recipe(object):
         ing1 = choice(self.ingredient)
         ing2 = choice(self.ingredient)
 
-        a = ing1.__unicode__() + u" à la " + ing2.__unicode__()
-        print a
-        return a 
+        return link_title_recipe(ing1.__unicode__(), ing2.__unicode__())
 
 if __name__ == "__main__":
     r = Recipe()
