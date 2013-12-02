@@ -4,15 +4,19 @@
    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 >
   <rdf:Description rdf:about="http://www.random-food.com/recipe#fourchette">
-    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
     <rdfs:label>Fourchette</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.random-food.com/recipe#couteau_a_beurre">
-    <rdfs:label>Couteau à beurre</rdfs:label>
     <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.random-food.com/recipe#mixeur_au_naquada">
-    <rdfs:label>Mixeur au naquada</rdfs:label>
     <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
+    <rdfs:label>Mixeur au naquada</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random-food.com/recipe#couteau_a_beurre">
+    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
+    <rdfs:label>Couteau à beurre</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random-food.com/utensil#test">
+    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
+    <rdfs:label>test</rdfs:label>
   </rdf:Description>
 </rdf:RDF>

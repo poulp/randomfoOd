@@ -25,6 +25,7 @@
                 <ul class="nav navbar-nav">
                     <li class=""><a href="{% url "home" %}">Accueil</a></li>
                     <li class=""><a href="{% url "home_recette" %}">Recette</a></li>
+                    <li class=""><a href="{% url "home_contribute" %}">Contribuer</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {% if user.is_authenticated %}

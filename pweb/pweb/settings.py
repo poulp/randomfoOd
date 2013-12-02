@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 	'south',
 	'debug_toolbar',
+    'crispy_forms',
     'pweb.recette',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
@@ -167,3 +168,5 @@ LOGGING = {
 
 LOGIN_URL = "/member/login"
 LOGIN_REDIRECT_URL = "/"
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'

@@ -6,13 +6,16 @@ MarkupSafe==0.18
 RDFAlchemy==0.2.9
 SPARQLWrapper==1.5.2
 South==0.8.2
+Unidecode==0.04.1
 Werkzeug==0.9.4
 argparse==1.2.1
+django-crispy-forms==1.4.0
 django-debug-toolbar==0.9.4
 html5lib==0.99
 isodate==0.4.9
 itsdangerous==0.23
 pyparsing==1.5.7
 rdflib==4.0.1
+simplejson==3.3.1
 six==1.4.1
 wsgiref==0.1.2
