@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1>Documentation</h1>
+    </div>
+</div>
+
+{% for url in urls %}
+<div class="container">
+    <div class="col-md-1">
+        {{ url.get_status|safe }}
+    </div>
+    <div class="col-md-3">
+        <a href="{{ url.prefix }}{{ url }}">{{ url }}</a>
+    </div>
+    <div class="col-md-3">
+        {{ url.doc }}
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-12">
+        <hr>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
