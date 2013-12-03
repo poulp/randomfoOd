@@ -44,5 +44,34 @@
     </div>
 </div>
 
+<div class="container">
+    <div class="col-md-6">
+        <table class="table">
+            <caption>Liste des ustensiles</caption>
+            <tr>
+                <th>Nom</th>
+            </tr>
+            {% for utensil in utensils %}
+            <tr>
+                <td>{{ utensil }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-md-6">
+        <table class="table">
+            <caption>Liste des actions</caption>
+            <tr>
+                <th>Nom</th>
+            </tr>
+            {% for action in actions %}
+            <tr>
+                <td>{{ action }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
 
 {% endblock %}
