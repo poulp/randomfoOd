@@ -7,9 +7,9 @@
     <rdfs:label>Fourchette</rdfs:label>
     <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.random-food.com/recipe#mixeur_au_naquada">
+  <rdf:Description rdf:about="http://www.random-food.com/utensil#bonjour_lol_a">
+    <rdfs:label>bonjour lol à</rdfs:label>
     <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
-    <rdfs:label>Mixeur au naquada</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.random-food.com/recipe#couteau_a_beurre">
     <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
@@ -18,5 +18,9 @@
   <rdf:Description rdf:about="http://www.random-food.com/utensil#test">
     <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
     <rdfs:label>test</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random-food.com/recipe#mixeur_au_naquada">
+    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
+    <rdfs:label>Mixeur au naquada</rdfs:label>
   </rdf:Description>
 </rdf:RDF>

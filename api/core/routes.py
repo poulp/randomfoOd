@@ -88,6 +88,11 @@ def get_utensils():
     load_rdf_file(STORE['utensils'])
     return get_rdf_graph()
 
+@app.route(PREFIX + '/utensil/delete/<label>', methods=['DELETE'])
+def delete_utensil(label):
+    """ Supprime un ustensile """
+    print label
+    return ''
 
 
 ##### DOCUMENTATION

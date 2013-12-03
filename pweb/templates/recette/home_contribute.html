@@ -50,10 +50,12 @@
             <caption>Liste des ustensiles</caption>
             <tr>
                 <th>Nom</th>
+                <th>URI</th>
             </tr>
             {% for utensil in utensils %}
             <tr>
                 <td>{{ utensil }}</td>
+                <td>{{ utensil.uri }}</td>
             </tr>
             {% endfor %}
         </table>
