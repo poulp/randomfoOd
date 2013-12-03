@@ -12,8 +12,7 @@ class AddUtensil(forms.Form):
         self.helper.form_method = 'post'
 
         self.helper.layout = Layout(
-        Field('label'),
-        Submit('submit', u'Ajouter l\'ustensile'),
+            Field('label'),
+            Submit('submit', u'Ajouter l\'ustensile'),
         )
         super(AddUtensil, self).__init__(*args, **kwargs)
-

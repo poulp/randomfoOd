@@ -10,7 +10,7 @@ class UrlDoc(object):
         self.prefix = "http://localhost:5000"
 
     def __unicode__(self):
-         return self.url
+        return self.url
 
     def get_headers(self):
         return ", ".join(self.headers)

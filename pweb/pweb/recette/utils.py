@@ -16,12 +16,12 @@ GET_UTENSIL_URL = "http://localhost:5000/api/v1/utensil/get"
 GET_ACTION_URL = "http://localhost:5000/api/v1/action/get"
 
 
-
 class Base(object):
     def __init__(self, uri):
         self.uri = uri
 
 ##### OBJECTS #####
+
 
 class Ingredient(object):
     def __init__(self, name, unit, quantity):
@@ -41,12 +41,14 @@ class Utensil(Base):
     def __unicode__(self):
         return self.name
 
+
 class Action(object):
     def __init__(self, name):
         self.name = name
 
     def __unicode__(self):
         return self.name
+
 
 class Recipe(object):
     def __init__(self):
@@ -94,6 +96,7 @@ def get_utensils():
     for s, p, o in graph.triples((None, RDF.type, NS1.Utensil)):
         list_utensils.append(Utensil(s, graph.value(s, RDFS.label)))
     return list_utensils
+
 
 def add_utensil(label):
     """ Add utensil to the store """
