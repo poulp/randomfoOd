@@ -80,6 +80,15 @@ def add_utensil():
     # On retourne une chaine vide pour renvoyer un code HTTP 200
     return ''
 
+@app.route(PREFIX + '/utensil/get/', methods=['GET'])
+@produces(XML)
+@use_graph
+def get_utensils():
+    """ Liste tout les ustensiles """
+    load_rdf_file(STORE['utensils'])
+    return get_rdf_graph()
+
+
 
 ##### DOCUMENTATION
 @app.route(PREFIX + '/doc', methods=['GET'])
