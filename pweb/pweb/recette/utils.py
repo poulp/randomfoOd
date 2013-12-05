@@ -74,7 +74,7 @@ class Recipe(object):
 
         #utensil
         for s, p, o in self.graph.triples((None, RDF.type, NS1.Utensil)):
-            self.utensil.append(Utensil(self.graph.value(s, RDFS.label)))
+            self.utensil.append(Utensil(s, self.graph.value(s, RDFS.label)))
 
     def get_title(self):
         ing1 = choice(self.ingredient)

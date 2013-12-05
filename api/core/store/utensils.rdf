@@ -3,30 +3,40 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 >
-  <rdf:Description rdf:about="http://www.random-food.com/utensil#boussole">
-    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
-    <rdfs:label>Boussole</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.random-food.com/utensil#marteau">
-    <rdfs:label>Marteau</rdfs:label>
-  <rdf:Description rdf:about="http://www.random-food.com/utensil#moulinette_du_bresil">
-    <rdfs:label>Moulinette du Brésil</rdfs:label>
-    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
-  </rdf:Description>
   <rdf:Description rdf:about="http://www.random-food.com/utensil#ordinateur_portable">
     <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
     <rdfs:label>Ordinateur portable</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.random-food.com/utensil#planche_de_surf">
+  <rdf:Description rdf:about="http://www.random-food.com/utensil#lol">
     <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
-    <rdfs:label>Planche de surf</rdfs:label>
+    <rdfs:label>lol</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random-food.com/utensil#moulinette_du_bresil">
+    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
+    <rdfs:label>Moulinette du Brésil</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random-food.com/utensil#boussole">
+    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
+    <rdfs:label>Boussole</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random-food.com/utensil#ustensile_lambda">
+    <rdfs:label>Ustensile lambda</rdfs:label>
+    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random-food.com/utensil#macher">
+    <rdfs:label>Macher</rdfs:label>
+    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random-food.com/utensil#flute_de_pan">
+    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
+    <rdfs:label>Flute de pan</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://www.random-food.com/utensil#reacteur_nucleaire">
     <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
     <rdfs:label>Réacteur nucléaire</rdfs:label>
   </rdf:Description>
-  <rdf:Description rdf:about="http://www.random-food.com/utensil#flute_de_pan">
+  <rdf:Description rdf:about="http://www.random-food.com/utensil#planche_de_surf">
+    <rdfs:label>Planche de surf</rdfs:label>
     <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
-    <rdfs:label>Flute de pan</rdfs:label>
   </rdf:Description>
 </rdf:RDF>
