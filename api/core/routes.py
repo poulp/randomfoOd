@@ -19,7 +19,7 @@ PREFIX = '/api/v1'
 @app.route(PREFIX + '/ingredient/gen/<int:number>', methods=['GET'])
 @produces(XML)
 @use_graph
-def get_ingredients(number):
+def gen_ingredients(number):
     """ Génère <number> ingrédients """
     IngredientGenerator.generate(number)
     return get_rdf_graph()
@@ -58,8 +58,6 @@ def add_action():
 def get_recipe():
     """ Génère une recette complète """
     RecipeGenerator.generate()
-    from rdfalchemy.rdfSubject import rdfSubject
-    print rdfSubject.db.all_nodes()
     return get_rdf_graph()
 
 

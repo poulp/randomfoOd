@@ -2,12 +2,14 @@
 # -*- coding: utf-8 -*-
 
 from random import randint, choice, sample
+from itertools import chain
 
+from rdflib import ConjunctiveGraph
+from rdfalchemy.rdfSubject import rdfSubject
 from rdfalchemy.sparql import SPARQLGraph
-from rdfalchemy.rdfsSubject import rdfSubject
 
 from constants import SPARQL_ENDPOINTS, STORE, NAMESPACES
-from models import Ingredient, Recipe
+from models import Ingredient, Recipe, Utensil
 from utils import load_rdf_file
 
 
@@ -63,10 +65,19 @@ class UtensilGenerator(object):
     """
 
     @classmethod
-    def generate(cls, number):
-        load_rdf_file(STORE['utensils'])
-        number %= len(rdfSubject.db.all_nodes())
-        return sample(rdfSubject.db.all_nodes(), number)
+    def generate(cls, n):
+        n = 4
+        graph = ConjunctiveGraph()
+        load_rdf_file(STORE['utensils'], graph)
+
+        all_uris = set(graph.subjects())
+        n %= len(all_uris)  # Pour ne pas dépasser le nombre d'ustensiles total
+        selected_uris = sample(all_uris, n)
+
+        selected_triples = chain(*map(graph.triples, ((uri, None, None) for uri in selected_uris)))
+        map(rdfSubject.db.add, selected_triples)
+
+        return [Utensil(uri) for uri in selected_uris]
 
 
 class RecipeGenerator(object):
@@ -77,7 +88,7 @@ class RecipeGenerator(object):
     @classmethod
     def generate(cls):
         n = randint(1, 1000)
-        i = IngredientGenerator.generate(randint(5, 15))
-        u = UtensilGenerator.generate(randint(3, 8))
+        i = IngredientGenerator.generate(randint(5, 10))
+        u = UtensilGenerator.generate(randint(3, 6))
         # actions
         return Recipe(person_nb=n, ingredients=i, utensils=u)
