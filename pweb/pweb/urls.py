@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^$', 'pweb.views.home', name='home'),
     url(r'^member/', include('pweb.member.urls')),
     url(r'^recette/', include('pweb.recette.urls')),
+    url(r'^documentation/', 'pweb.views.api_doc', name='api_doc'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),

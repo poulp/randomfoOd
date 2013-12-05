@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1>Ajouter des données</h1>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <strong>Ustensiles</strong>
+            </div>
+            <div class="panel-body">
+                <p>Les ustensiles servent à manipuler les ingrédients.</p> 
+                <small>Exemple : Un couteau, une rape à fromage</small>
+            </div>
+            <div class="panel-footer">
+                <div class="container">
+                    <a class="btn btn-lg btn-primary" href="{% url "utensil_contribute" %}" role="button">Ajouter un ustensile</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <strong>Actions</strong>
+            </div>
+            <div class="panel-body">
+                <p>Une action est le résultat d'une combinaison
+                entre un ustensile et un ingrédient.</p>
+                <small>Exemple : Un couteau peut couper une pomme en tranche</small>
+            </div>
+            <div class="panel-footer">
+                <div class="container">
+                    <a class="btn btn-lg btn-primary" href="{% url "utensil_contribute" %}" role="button">Ajouter une action</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-6">
+        <table class="table table-striped">
+            <caption>Liste des ustensiles</caption>
+            <tr>
+                <th>Nom</th>
+                <th>URI</th>
+            </tr>
+            {% for utensil in utensils %}
+            <tr>
+                <td>{{ utensil }}</td>
+                <td>{{ utensil.uri }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-md-6">
+        <table class="table table-striped">
+            <caption>Liste des actions</caption>
+            <tr>
+                <th>Nom</th>
+            </tr>
+            {% for action in actions %}
+            <tr>
+                <td>{{ action }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -12,7 +12,7 @@
         <h2>Ingrédients</h2>
         <ul class="list-group">
             {% for ingredient in recipe.ingredient %}
-            <li class="list-group-item">{{ ingredient.quantity }} {{ ingredient.unit }} de {{ ingredient.name }}</li>
+            <li class="list-group-item">{{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.name|display_ingredient }}</li>
             {% endfor %}
         </ul>
     </div>

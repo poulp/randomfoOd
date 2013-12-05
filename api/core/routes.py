@@ -9,7 +9,8 @@ from rdflib import URIRef
 from generators import IngredientGenerator, RecipeGenerator
 from models import Utensil, Action
 from constants import STORE, BASE_URI_ACTION, BASE_URI_UTENSIL, JSON, XML
-from utils import use_graph, load_rdf_file, save_rdf_file, get_rdf_graph, sanitize
+from utils import use_graph, load_rdf_file, save_rdf_file,\
+    get_rdf_graph, sanitize
 from . import app
 
 PREFIX = '/api/v1'
@@ -78,6 +79,22 @@ def add_utensil():
     return ''
 
 
+@app.route(PREFIX + '/utensil/get/', methods=['GET'])
+@produces(XML)
+@use_graph
+def get_utensils():
+    """ Liste tout les ustensiles """
+    load_rdf_file(STORE['utensils'])
+    return get_rdf_graph()
+
+
+@app.route(PREFIX + '/utensil/delete/<label>', methods=['DELETE'])
+def delete_utensil(label):
+    """ Supprime un ustensile """
+    print label
+    return ''
+
+
 ##### DOCUMENTATION
 @app.route(PREFIX + '/doc', methods=['GET'])
 def doc():
@@ -85,5 +102,8 @@ def doc():
     func_list = {}
     for rule in app.url_map.iter_rules():
         if rule.endpoint != 'static':
-            func_list[rule.rule] = [app.view_functions[rule.endpoint].__doc__, ', '.join(rule.methods)]
+            func_list[rule.rule] = [
+                app.view_functions[rule.endpoint].__doc__,
+                ', '.join(rule.methods)
+            ]
     return jsonify(func_list)

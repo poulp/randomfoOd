@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+import os
+
+SITE_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(__file__)))
 
 RDF_XML = 'application/rdf+xml'
 XML = 'application/xml'
@@ -21,6 +24,6 @@ SPARQL_ENDPOINTS = {
 }
 
 STORE = {
-    'utensils': 'core/store/utensils.rdf',
-    'actions':  'core/store/actions.rdf'
+    'utensils': os.path.join(SITE_ROOT, 'core/store/utensils.rdf'),
+    'actions':  os.path.join(SITE_ROOT, 'core/store/actions.rdf')
 }
