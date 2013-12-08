@@ -149,12 +149,12 @@ def get_images_from_label(label, limit=100):
             SELECT ?img
             {
                 ?uri rdfs:label ?txt.
-                ?txt bif:contains "laine".
+                ?txt bif:contains "%s".
                 ?uri foaf:depiction ?img.
                 MINUS { ?uri rdf:type dbpedia-owl:Person . }
 
-            } LIMIT 100
-            """
+            } LIMIT %d
+            """ % (label, limit)
     g = SPARQLGraph(url)
     result = list(g.query(query, resultMethod="json"))
 
