@@ -60,7 +60,7 @@ class Recipe(object):
 
         self.ingredient = []
         self.utensil = []
-        self.nb_pers = 0
+        self.nb_person = 0
 
         self.ing1 = ""
         self.ing2 = ""
@@ -85,6 +85,9 @@ class Recipe(object):
         #utensil
         for s, p, o in self.graph.triples((None, RDF.type, NS1.Utensil)):
             self.utensil.append(Utensil(s, self.graph.value(s, RDFS.label)))
+
+        for s, p, o in self.graph.triples((None, RDF.type, LIRMM.Recipe)):
+            self.nb_person = self.graph.value(s, NS1.nb_person)
         
         self.ing1 = choice(self.ingredient)
         self.ing2 = choice(self.ingredient)
