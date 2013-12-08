@@ -1,4 +1,5 @@
 body {
+    background-color : #F0F0F0;
 }
 
 .form-signin {
@@ -38,4 +39,8 @@ body {
 
 .form-signin button {
     margin-top: 10px;
+}
+
+.jumbotron {
+    background-color : white;
 }

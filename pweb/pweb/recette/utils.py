@@ -8,6 +8,8 @@ from rdflib.namespace import RDF, RDFS
 from random import choice
 from syntax import link_title_recipe
 
+from rdfalchemy.sparql import SPARQLGraph
+
 NS1 = Namespace('http://www.random-food.com/ontology#')
 LIRMM = Namespace('http://data.lirmm.fr/ontologies/food#')
 
@@ -23,8 +25,9 @@ class Base(object):
 ##### OBJECTS #####
 
 
-class Ingredient(object):
-    def __init__(self, name, unit, quantity):
+class Ingredient(Base):
+    def __init__(self, uri, name, unit, quantity):
+        super(Ingredient, self).__init__(uri)
         self.name = name
         self.unit = unit
         self.quantity = quantity
@@ -51,7 +54,7 @@ class Action(object):
 
 
 class Recipe(object):
-    def __init__(self):
+    def __init__(self, dev=False):
         self.url = "http://localhost:5000/api/v1/recipe/gen"
         self.graph = Graph()
 
@@ -59,28 +62,35 @@ class Recipe(object):
         self.utensil = []
         self.nb_pers = 0
 
-        self.request()
+        self.ing1 = ""
+        self.ing2 = ""
 
-    def request(self):
-        headers = {"Accept": "application/xml"}
-        req = urllib2.Request(self.url, headers=headers)
-        response = urllib2.urlopen(req)
+        self.request(dev)
 
-        self.graph.parse(data=response.read(), format="xml")
+    def request(self, dev=False):
+       
+        if not dev:
+            headers = {"Accept": "application/xml"}
+            req = urllib2.Request(self.url, headers=headers)
+            response = urllib2.urlopen(req)
+            self.graph.parse(data=response.read(), format="xml")
+        else:
+            #self.graph.parse(data="dev_rdf.xml", format="xml")
+            self.graph.load("pweb/recette/dev_rdf.xml", format="xml")
 
         #ingredients
         for s, p, o in self.graph.triples((None, RDF.type, LIRMM.Ingredient)):
-            self.ingredient.append(Ingredient(self.graph.value(s, RDFS.label), self.graph.value(s, LIRMM.unit), self.graph.value(s, LIRMM.quantity)))
+            self.ingredient.append(Ingredient(s, self.graph.value(s, RDFS.label), self.graph.value(s, LIRMM.unit), self.graph.value(s, LIRMM.quantity)))
 
         #utensil
         for s, p, o in self.graph.triples((None, RDF.type, NS1.Utensil)):
             self.utensil.append(Utensil(s, self.graph.value(s, RDFS.label)))
+        
+        self.ing1 = choice(self.ingredient)
+        self.ing2 = choice(self.ingredient)
 
     def get_title(self):
-        ing1 = choice(self.ingredient)
-        ing2 = choice(self.ingredient)
-
-        return link_title_recipe(ing1.__unicode__(), ing2.__unicode__())
+        return link_title_recipe(self.ing1.__unicode__(), self.ing2.__unicode__())
 
 
 ##### Utils function #####
@@ -125,6 +135,30 @@ def get_actions():
     for s, p, o in graph.triples((None, RDF.type, NS1.Action)):
         list_actions.append(Action(graph.value(s, RDFS.label)))
     return list_actions
+
+def get_images_from_label(label, limit=100):
+    """ return a list of url's image found by 
+        a label query on dbpedia
+    """
+    url = "http://dbpedia.org/sparql"
+    query = """
+            PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
+            SELECT ?img
+            {
+                ?uri rdfs:label ?txt.
+                ?txt bif:contains "laine".
+                ?uri foaf:depiction ?img.
+                MINUS { ?uri rdf:type dbpedia-owl:Person . }
+
+            } LIMIT 100
+            """
+    g = SPARQLGraph(url)
+    result = list(g.query(query, resultMethod="json"))
+
+    return [ img_url[0].__str__() for img_url in result]
 
 if __name__ == "__main__":
     r = Recipe()

@@ -2,15 +2,22 @@ from django.shortcuts import render_to_response, RequestContext, redirect
 from forms import AddUtensil
 
 from utils import Recipe, get_utensils, add_utensil, \
-    get_actions
+    get_actions, get_images_from_label
 
 
-def home(request):
-    r = Recipe()
+def home_recette(request):
+    c = {}
+    return render_to_response('recette/home_recette.html', c, RequestContext(request))
+
+
+def gen_recette(request):
+    r = Recipe(dev=True)
+    list_img = get_images_from_label(r.ing1)
     c = {
         'recipe': r,
+        'list_img': list_img,
     }
-    return render_to_response('recette/home.html', c, RequestContext(request))
+    return render_to_response('recette/gen_recette.html', c, RequestContext(request))
 
 
 def home_contribute(request):
@@ -35,3 +42,7 @@ def utensil_contribute(request):
         'form': form,
     }
     return render_to_response('recette/utensil_contribute.html', c, RequestContext(request))
+
+
+def add_contribute(request):
+    return render_to_response('recette/add_contribute.html', {}, RequestContexte(request))

@@ -1,5 +1,6 @@
 from django import template
 from ..syntax import link_ingredient
+import simplejson
 
 register = template.Library()
 
@@ -12,3 +13,7 @@ def random_title(recipe):
 @register.filter
 def display_ingredient(ingredient):
     return link_ingredient(ingredient)
+
+@register.filter
+def jsonify(l):
+    return simplejson.dumps(l)

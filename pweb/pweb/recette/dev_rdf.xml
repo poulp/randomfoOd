@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF
+   xmlns:ns1="http://data.lirmm.fr/ontologies/food#"
+   xmlns:ns2="http://www.random-food.com/ontology#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+>
+  <rdf:Description rdf:about="http://www.random-food.com/utensil#boussole">
+    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
+    <rdfs:label>Boussole</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0052e44b2c854e168fb644c6e99d7032">
+    <ns1:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">193</ns1:quantity>
+    <rdf:type rdf:resource="http://data.lirmm.fr/ontologies/food#Ingredient"/>
+    <rdfs:label xml:lang="fr">bitch</rdfs:label>
+    <ns1:unit>poignées</ns1:unit>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N601933d9c40a43b8a4b6e2d28e1e6c3d">
+    <ns1:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">33</ns1:quantity>
+    <rdf:type rdf:resource="http://data.lirmm.fr/ontologies/food#Ingredient"/>
+    <ns1:unit>mg</ns1:unit>
+    <rdfs:label xml:lang="fr">lunch</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3dc3e51cee264ca2a3007622fc2004ca">
+    <rdfs:label xml:lang="fr">pair</rdfs:label>
+    <ns1:unit>litres</ns1:unit>
+    <ns1:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">129</ns1:quantity>
+    <rdf:type rdf:resource="http://data.lirmm.fr/ontologies/food#Ingredient"/>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Ne7f48c3908eb43479cedd82ca1adbc6e">
+    <rdf:type rdf:resource="http://data.lirmm.fr/ontologies/food#Ingredient"/>
+    <rdfs:label xml:lang="fr">armistice</rdfs:label>
+    <ns1:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">182</ns1:quantity>
+    <ns1:unit>mm</ns1:unit>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random-food.com/utensil#reacteur_nucleaire">
+    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
+    <rdfs:label>Réacteur nucléaire</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random-food.com/utensil#planche_de_surf">
+    <rdfs:label>Planche de surf</rdfs:label>
+    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random-food.com/utensil#ordinateur_portable">
+    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
+    <rdfs:label>Ordinateur portable</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="Nada84caa3c2747d390d7b55dc21c1838">
+    <rdf:type rdf:resource="http://data.lirmm.fr/ontologies/food#Ingredient"/>
+    <ns1:unit>pincées</ns1:unit>
+    <ns1:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">198</ns1:quantity>
+    <rdfs:label xml:lang="fr">clairvoyance</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N3bf1e5526f6d4e23939b52772449ca3d">
+    <ns1:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">111</ns1:quantity>
+    <rdf:type rdf:resource="http://data.lirmm.fr/ontologies/food#Ingredient"/>
+    <ns1:unit>mg</ns1:unit>
+    <rdfs:label xml:lang="fr">muse</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N0793bb5db30245c28fb33b191b45fe8c">
+    <rdf:type rdf:resource="http://data.lirmm.fr/ontologies/food#Ingredient"/>
+    <rdfs:label xml:lang="fr">phone</rdfs:label>
+    <ns1:unit>paquets</ns1:unit>
+    <ns1:quantity rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">171</ns1:quantity>
+  </rdf:Description>
+  <rdf:Description rdf:nodeID="N6bb10d57af1d4725beea83d84c63feb6">
+    <ns1:Ingredient rdf:nodeID="Ne7f48c3908eb43479cedd82ca1adbc6e"/>
+    <ns2:Utensil rdf:resource="http://www.random-food.com/utensil#ordinateur_portable"/>
+    <ns1:Ingredient rdf:nodeID="N3bf1e5526f6d4e23939b52772449ca3d"/>
+    <ns1:Ingredient rdf:nodeID="N0793bb5db30245c28fb33b191b45fe8c"/>
+    <rdf:type rdf:resource="http://data.lirmm.fr/ontologies/food#Recipe"/>
+    <ns1:Ingredient rdf:nodeID="N3dc3e51cee264ca2a3007622fc2004ca"/>
+    <ns2:Utensil rdf:resource="http://www.random-food.com/utensil#planche_de_surf"/>
+    <ns1:Ingredient rdf:nodeID="Nada84caa3c2747d390d7b55dc21c1838"/>
+    <ns2:Utensil rdf:resource="http://www.random-food.com/utensil#boussole"/>
+    <ns1:Ingredient rdf:nodeID="N601933d9c40a43b8a4b6e2d28e1e6c3d"/>
+    <ns2:nb_person rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">499</ns2:nb_person>
+    <ns1:Ingredient rdf:nodeID="N0052e44b2c854e168fb644c6e99d7032"/>
+    <ns2:Utensil rdf:resource="http://www.random-food.com/utensil#reacteur_nucleaire"/>
+  </rdf:Description>
+</rdf:RDF>
