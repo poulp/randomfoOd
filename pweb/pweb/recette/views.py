@@ -46,4 +46,4 @@ def utensil_contribute(request):
 
 
 def add_contribute(request):
-    return render_to_response('recette/add_contribute.html', {}, RequestContexte(request))
+    return render_to_response('recette/add_contribute.html', {}, RequestContext(request))

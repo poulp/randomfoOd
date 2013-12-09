@@ -68,7 +68,7 @@ class Recipe(object):
         self.request(dev)
 
     def request(self, dev=False):
-       
+
         if not dev:
             headers = {"Accept": "application/xml"}
             req = urllib2.Request(self.url, headers=headers)
@@ -88,7 +88,7 @@ class Recipe(object):
 
         for s, p, o in self.graph.triples((None, RDF.type, LIRMM.Recipe)):
             self.nb_person = self.graph.value(s, NS1.nb_person)
-        
+
         self.ing1 = choice(self.ingredient)
         self.ing2 = choice(self.ingredient)
 
@@ -139,8 +139,9 @@ def get_actions():
         list_actions.append(Action(graph.value(s, RDFS.label)))
     return list_actions
 
+
 def get_images_from_label(label, limit=100):
-    """ return a list of url's image found by 
+    """ return a list of url's image found by
         a label query on dbpedia
     """
     url = "http://dbpedia.org/sparql"
@@ -161,7 +162,7 @@ def get_images_from_label(label, limit=100):
     g = SPARQLGraph(url)
     result = list(g.query(query, resultMethod="json"))
 
-    return [ img_url[0].__str__() for img_url in result]
+    return [img_url[0].toPython() for img_url in result]
 
 if __name__ == "__main__":
     r = Recipe()
