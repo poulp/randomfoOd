@@ -3,7 +3,7 @@
 # Fichier contenant des fonctions et constantes
 # pour assurer les corréctions de syntaxe française
 
-VOYELLE = ['a', 'e', 'i', 'o', 'u']
+VOYELLE = ['a', 'e', 'i', 'o', 'u', 'é', 'è']
 
 
 # construction du titre de la recette
