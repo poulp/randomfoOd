@@ -64,6 +64,10 @@
                 previousImg();
                 setImg(id_current_img);
             });
+
+            $("#refresh").click(function(){
+                location.reload();
+            });
         });
     </script>
 {% endblock %}
@@ -74,6 +78,7 @@
         <h1>{{ recipe|random_title }}<small> pour {{ recipe.nb_person }} personnes</small></h1>
     </div>
 </div>
+
 <div class="container">
     <div class="col-md-4">
         <div class="container">
@@ -108,7 +113,16 @@
         </ul>
     </div>
 </div>
-
 <div class="container">
+    <div class="col-md-12">
+        <hr style="background-color:red">
+    </div>
+</div>
+<div class="container">
+    <div class="col-md-12">
+        <a href="#" class="btn btn-lg btn-success">Sauvegarder</a>
+        <a href="#" id="refresh" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-refresh"></span>
+            Recharger la page</a>
+    </div>
 </div>
 {% endblock %}
