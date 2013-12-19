@@ -2,14 +2,13 @@
 # -*- coding: utf-8 -*-
 
 from flask import request, jsonify
-from flask_negotiate import produces, consumes
 
 from rdflib import URIRef
 
 from generators import IngredientGenerator, RecipeGenerator
 from models import Utensil, Action
 from constants import STORE, BASE_URI_ACTION, BASE_URI_UTENSIL, JSON, XML
-from utils import reset_graph, load_rdf_file, save_rdf_file, get_rdf_graph, sanitize
+from utils import reset_graph, load_rdf_file, save_rdf_file, get_rdf_graph, sanitize, produces, consumes
 from . import app
 
 PREFIX = '/api/v1'
@@ -18,7 +17,7 @@ PREFIX = '/api/v1'
 ##### INGREDIENTS
 @app.route(PREFIX + '/ingredient/gen/<int:number>', methods=['GET'])
 @produces(XML)
-@reset_graph
+#@reset_graph
 def gen_ingredients(number):
     """ Génère <number> ingrédients """
     IngredientGenerator.generate(number)
@@ -83,7 +82,7 @@ def add_utensil():
 @produces(XML)
 @reset_graph
 def get_utensils():
-    """ Liste tout les ustensiles """
+    """ Liste tous les ustensiles """
     load_rdf_file(STORE['utensils'])
     return get_rdf_graph()
 
@@ -106,11 +105,16 @@ def sparql_endpoint():
 @app.route(PREFIX + '/doc', methods=['GET'])
 def doc():
     """ Affiche la liste des routes disponibles"""
-    func_list = {}
+    documentation = {}
+
     for rule in app.url_map.iter_rules():
         if rule.endpoint != 'static':
-            func_list[rule.rule] = [
-                app.view_functions[rule.endpoint].__doc__,
-                ', '.join(rule.methods)
-            ]
-    return jsonify(func_list)
+            func = app.view_functions[rule.endpoint]
+            documentation[rule.rule] = {
+                'doc': func.__doc__,
+                'methods': list(rule.methods),
+                'consumes': getattr(func, 'consumes', ['*/*']),
+                'produces': getattr(func, 'produces', ['*/*'])
+            }
+
+    return jsonify(documentation)

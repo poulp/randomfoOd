@@ -20,7 +20,8 @@ def api_doc(request):
     doc_json = json.loads(response.read())
     list_urls = []
     for url in doc_json:
-        list_urls.append(UrlDoc(url, doc_json[url][0], doc_json[url][1]))
+        list_urls.append(UrlDoc(url, doc_json[url]['doc'], doc_json[url]['methods'], doc_json[url]['consumes'],
+                                doc_json[url]['produces']))
 
     c = {
         'urls': list_urls,

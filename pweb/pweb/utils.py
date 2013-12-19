@@ -3,10 +3,12 @@
 
 
 class UrlDoc(object):
-    def __init__(self, url, doc, headers):
+    def __init__(self, url, doc, headers, consumes, produces):
         self.url = url
         self.doc = doc
-        self.headers = headers.split(", ")
+        self.headers = headers
+        self.consumes = consumes
+        self.produces = produces
         self.prefix = "http://localhost:5000"
 
     def __unicode__(self):
@@ -14,6 +16,12 @@ class UrlDoc(object):
 
     def get_headers(self):
         return ", ".join(self.headers)
+
+    def get_consumes(self):
+        return ", ".join(self.consumes)
+
+    def get_produces(self):
+        return ", ".join(self.produces)
 
     def get_status(self):
         if "GET" in self.headers:

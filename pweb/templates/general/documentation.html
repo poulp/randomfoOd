@@ -8,27 +8,62 @@
 </div>
 
 <div class="container" style="background-color:white;border-radius:10px;padding:30px">
-<div class="col-md-12">
-{% for url in urls %}
-<div class="container">
-    <div class="col-md-1">
-        {{ url.get_status|safe }}
-    </div>
-    <div class="col-md-3">
-        <a href="{{ url.prefix }}{{ url }}">{{ url }}</a>
-    </div>
-    <div class="col-md-3">
-        {{ url.doc }}
-    </div>
-</div>
+    <div class="col-md-12">
+        <div class="container">
+            <div class="col-md-1">
+                <h5>Méthodes<a href="#footnote"><sup>1</sup></a></h5>
+            </div>
+            <div class="col-md-3">
+                <h5>Adresse</h5>
+            </div>
+            <div class="col-md-3">
+                <h5>Doc</h5>
+            </div>
+            <div class="col-md-2">
+                <h5>Consomme</h5>
+            </div>
+            <div class="col-md-2">
+                <h5>Produit</h5>
+            </div>
+        </div>
 
-<div class="container">
-    <div class="col-md-11">
-        <hr>
+        <div class="container">
+            <div class="col-md-11">
+                <hr>
+            </div>
+        </div>
+        {% for url in urls %}
+        <div class="container">
+            <div class="col-md-1">
+                {{ url.get_status|safe }}
+            </div>
+            <div class="col-md-3">
+                <a href="{{ url.prefix }}{{ url }}">{{ url }}</a>
+            </div>
+            <div class="col-md-3">
+                {{ url.doc }}
+            </div>
+            <div class="col-md-2">
+                {{ url.get_consumes }}
+            </div>
+            <div class="col-md-2">
+                {{ url.get_produces }}
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="col-md-11">
+                <hr>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-</div>
-{% endfor %}
-</div>
+    <div id="footnote" class="container">
+        <div class="col-md-11">
+            <p class="text-muted">1. Les méthodes <em>GET</em>, <em>HEAD</em> et <em>OPTIONS</em> sont toujours
+                disponibles.</p>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
