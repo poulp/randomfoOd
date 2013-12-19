@@ -69,9 +69,10 @@ def add_utensil():
     """ Ajouter un ustensile """
     store_file = STORE['utensils']
     label = request.json['label']
+    actions = request.json['actions']
 
     load_rdf_file(store_file)
-    Utensil(resUri=URIRef(BASE_URI_UTENSIL + sanitize(label)), label=label)
+    Utensil(resUri=URIRef(BASE_URI_UTENSIL + sanitize(label)), label=label, actions=actions)
     save_rdf_file(store_file)
 
     # On retourne une chaine vide pour renvoyer un code HTTP 200
@@ -87,18 +88,12 @@ def get_utensils():
     return get_rdf_graph()
 
 
-@app.route(PREFIX + '/utensil/delete/<label>', methods=['DELETE'])
-def delete_utensil(label):
-    """ Supprime un ustensile """
-    print label
-    return ''
-
-
 ##### ENDPOINT SPARQL
 @app.route(PREFIX + '/sparql', methods=['GET'])
 @produces(XML)
 @reset_graph
 def sparql_endpoint():
+    """ Le endpoint sparql"""
     pass
 
     # Non fonctionnel

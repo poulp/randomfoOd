@@ -4,7 +4,7 @@
 from random import randint, choice, sample
 from itertools import chain
 
-from rdflib import ConjunctiveGraph
+from rdflib import ConjunctiveGraph, URIRef
 from rdfalchemy.rdfSubject import rdfSubject
 from rdfalchemy.sparql import SPARQLGraph
 
@@ -66,7 +66,6 @@ class UtensilGenerator(object):
 
     @classmethod
     def generate(cls, n):
-        n = 4
         graph = ConjunctiveGraph()
         load_rdf_file(STORE['utensils'], graph)
 
@@ -74,10 +73,26 @@ class UtensilGenerator(object):
         n %= len(all_uris)  # Pour ne pas dépasser le nombre d'ustensiles total
         selected_uris = sample(all_uris, n)
 
+        # On récupère les ustensiles voulus dans le graphe
         selected_triples = chain(*map(graph.triples, ((uri, None, None) for uri in selected_uris)))
         map(rdfSubject.db.add, selected_triples)
 
         return [Utensil(uri) for uri in selected_uris]
+
+
+class ActionGenerator(object):
+    """
+    Récupère les actions des ustensiles passés en paramêtre pour les ajouter au graphe.
+    """
+
+    @classmethod
+    def generate(cls, utensils):
+        graph = ConjunctiveGraph()
+        load_rdf_file(STORE['actions'], graph)
+
+        for utensil in utensils:
+            for action in utensil.actions:
+                map(rdfSubject.db.add, graph.triples((URIRef(action), None, None)))
 
 
 class RecipeGenerator(object):
@@ -90,5 +105,7 @@ class RecipeGenerator(object):
         n = randint(1, 1000)
         i = IngredientGenerator.generate(randint(5, 10))
         u = UtensilGenerator.generate(randint(3, 6))
-        # actions
+
+        ActionGenerator.generate(u)
+
         return Recipe(person_nb=n, ingredients=i, utensils=u)

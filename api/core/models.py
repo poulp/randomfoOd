@@ -30,14 +30,8 @@ class Utensil(rdfSubject):
     actions = rdfMultiple(RANDOM_FOOD.Action)
 
 
-class Transformation(rdfSubject):
-    rdf_type = RANDOM_FOOD.Transformation
-    label = rdfSingle(RDFS.label)
-
-
 class Recipe(rdfSubject):
     rdf_type = FOOD.Recipe
     person_nb = rdfSingle(RANDOM_FOOD.nb_person)
     ingredients = rdfMultiple(FOOD.Ingredient)
     utensils = rdfMultiple(RANDOM_FOOD.Utensil)
-    # transformations = rdfMultiple()
