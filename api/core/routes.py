@@ -9,8 +9,7 @@ from rdflib import URIRef
 from generators import IngredientGenerator, RecipeGenerator
 from models import Utensil, Action
 from constants import STORE, BASE_URI_ACTION, BASE_URI_UTENSIL, JSON, XML
-from utils import use_graph, load_rdf_file, save_rdf_file,\
-    get_rdf_graph, sanitize
+from utils import reset_graph, load_rdf_file, save_rdf_file, get_rdf_graph, sanitize
 from . import app
 
 PREFIX = '/api/v1'
@@ -19,7 +18,7 @@ PREFIX = '/api/v1'
 ##### INGREDIENTS
 @app.route(PREFIX + '/ingredient/gen/<int:number>', methods=['GET'])
 @produces(XML)
-@use_graph
+@reset_graph
 def gen_ingredients(number):
     """ Génère <number> ingrédients """
     IngredientGenerator.generate(number)
@@ -29,7 +28,7 @@ def gen_ingredients(number):
 ##### ACTIONS
 @app.route(PREFIX + '/action/get/', methods=['GET'])
 @produces(XML)
-@use_graph
+@reset_graph
 def get_actions():
     """ Liste toutes les actions """
     load_rdf_file(STORE['actions'])
@@ -38,7 +37,7 @@ def get_actions():
 
 @app.route(PREFIX + '/action/add', methods=['POST'])
 @consumes(JSON)
-@use_graph
+@reset_graph
 def add_action():
     """ Ajoute une action à la base de données """
     store_file = STORE['actions']
@@ -55,7 +54,7 @@ def add_action():
 ##### RECIPES
 @app.route(PREFIX + '/recipe/gen', methods=['GET'])
 @produces(XML)
-@use_graph
+@reset_graph
 def get_recipe():
     """ Génère une recette complète """
     RecipeGenerator.generate()
@@ -65,7 +64,7 @@ def get_recipe():
 ##### UTENSILS
 @app.route(PREFIX + '/utensil/add', methods=['POST'])
 @consumes(JSON)
-@use_graph
+@reset_graph
 def add_utensil():
     """ Ajouter un ustensile """
     store_file = STORE['utensils']
@@ -81,7 +80,7 @@ def add_utensil():
 
 @app.route(PREFIX + '/utensil/get/', methods=['GET'])
 @produces(XML)
-@use_graph
+@reset_graph
 def get_utensils():
     """ Liste tout les ustensiles """
     load_rdf_file(STORE['utensils'])
@@ -93,6 +92,19 @@ def delete_utensil(label):
     """ Supprime un ustensile """
     print label
     return ''
+
+
+##### ENDPOINT SPARQL
+@app.route(PREFIX + '/sparql', methods=['GET'])
+@produces(XML)
+@reset_graph
+def sparql_endpoint():
+    pass
+
+    # Non fonctionnel
+    # map(load_rdf_file, STORE.itervalues())
+    # return rdfSubject.db.query(unquote(request.args.get('query')), initNs=NAMESPACES)
+    # return result.serialize()
 
 
 ##### DOCUMENTATION

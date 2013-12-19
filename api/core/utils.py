@@ -11,7 +11,7 @@ from unidecode import unidecode
 from constants import RDF_XML
 
 
-def use_graph(fn):
+def reset_graph(fn):
     @wraps(fn)
     def wrapper(*args, **kwargs):
         rdfSubject.db = ConjunctiveGraph()
@@ -21,7 +21,9 @@ def use_graph(fn):
 
 
 def load_rdf_file(file_name, graph=None):
-    if graph is None: graph = rdfSubject.db
+    if graph is None:
+        graph = rdfSubject.db
+
     try:
         # On charge le fichier
         graph.load(file_name, format=RDF_XML)
@@ -32,12 +34,16 @@ def load_rdf_file(file_name, graph=None):
 
 
 def get_rdf_graph(graph=None):
-    if graph is None: graph = rdfSubject.db
+    if graph is None:
+        graph = rdfSubject.db
+
     return graph.serialize(format=RDF_XML)
 
 
 def save_rdf_file(file_name, graph=None):
-    if graph is None: graph = rdfSubject.db
+    if graph is None:
+        graph = rdfSubject.db
+
     graph.serialize(file_name, format=RDF_XML)
 
 
