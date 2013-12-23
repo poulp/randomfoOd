@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from random import randint, choice, sample
+from random import randint, choice, sample, shuffle
 from itertools import chain
 
 from rdflib import ConjunctiveGraph, URIRef
@@ -9,7 +9,7 @@ from rdfalchemy.rdfSubject import rdfSubject
 from rdfalchemy.sparql import SPARQLGraph
 
 from constants import SPARQL_ENDPOINTS, STORE, NAMESPACES
-from models import Ingredient, Recipe, Utensil
+from models import Ingredient, Recipe, Utensil, TransformedIngredient
 from utils import load_rdf_file
 
 
@@ -70,14 +70,19 @@ class UtensilGenerator(object):
         load_rdf_file(STORE['utensils'], graph)
 
         all_uris = set(graph.subjects())
-        n %= len(all_uris)  # Pour ne pas dépasser le nombre d'ustensiles total
+        n = min(n, len(all_uris))
         selected_uris = sample(all_uris, n)
 
         # On récupère les ustensiles voulus dans le graphe
         selected_triples = chain(*map(graph.triples, ((uri, None, None) for uri in selected_uris)))
         map(rdfSubject.db.add, selected_triples)
 
-        return [Utensil(uri) for uri in selected_uris]
+        utensils = [Utensil(uri) for uri in selected_uris]
+
+        # On récupère les actions de ces ustensiles
+        ActionGenerator.generate(utensils)
+
+        return utensils
 
 
 class ActionGenerator(object):
@@ -95,6 +100,32 @@ class ActionGenerator(object):
                 map(rdfSubject.db.add, graph.triples((URIRef(action), None, None)))
 
 
+class TransformedIngredientGenerator(object):
+    """
+    Génère une liste de transformations avec les ustensiles et ingrédients fournis.
+    """
+
+    @classmethod
+    def generate(cls, utensils, ingredients):
+        print utensils, ingredients
+        transformations = []
+
+        while len(ingredients):
+            shuffle(ingredients)
+            used_utensil = choice(utensils)
+            used_action = choice(used_utensil.actions)
+
+            number_of_ingredients = min(choice([1, 2]), len(ingredients))
+            used_ingredients = [ingredients.pop() for _ in range(number_of_ingredients)]
+
+            transformation = TransformedIngredient(index=len(transformations), used_utensil=used_utensil,
+                                                   used_action=used_action, used_ingredients=used_ingredients)
+
+            transformations.append(transformation)
+
+        return transformations
+
+
 class RecipeGenerator(object):
     """
     Génère une recette complète en mixant tous les autres générateurs.
@@ -105,7 +136,6 @@ class RecipeGenerator(object):
         n = randint(1, 1000)
         i = IngredientGenerator.generate(randint(5, 10))
         u = UtensilGenerator.generate(randint(3, 6))
+        t = TransformedIngredientGenerator.generate(u, i)
 
-        ActionGenerator.generate(u)
-
-        return Recipe(person_nb=n, ingredients=i, utensils=u)
+        return Recipe(person_nb=n, ingredients=i, utensils=u, transformations=t)

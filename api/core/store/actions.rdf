@@ -3,8 +3,16 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 >
-  <rdf:Description rdf:about="http://www.random-food.com/recipe#decouper">
+  <rdf:Description rdf:about="http://www.random-food.com/recipe#arracher">
+    <rdfs:label>Arracher</rdfs:label>
     <rdf:type rdf:resource="http://www.random-food.com/ontology#Action"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random-food.com/recipe#decouper">
     <rdfs:label>Découper</rdfs:label>
+    <rdf:type rdf:resource="http://www.random-food.com/ontology#Action"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random-food.com/recipe#fracasser">
+    <rdfs:label>Fracasser</rdfs:label>
+    <rdf:type rdf:resource="http://www.random-food.com/ontology#Action"/>
   </rdf:Description>
 </rdf:RDF>
