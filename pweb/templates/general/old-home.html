@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block javascript %}
+<script src="http://code.jquery.com/jquery-2.0.3.min.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}js/bootstrap.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function(){
+        $(".carousel").carousel();
+    });
+
+
+</script>
+{% endblock %}
+
+{% block content %}
+<style type="text/css">
+    body {
+    background-image:url("{{ STATIC_URL }}img/back.jpg");
+    }
+    @font-face {
+    font-family: "Jumbo";
+    src: url({{ STATIC_URL }}fonts/Forque.ttf) format("truetype");
+    }
+
+    h1.customfont {
+    font-family : "Jumbo", Verdana, Tahoma;
+    }
+</style>
+
+<div class="container">
+    <h1 style="font-size:150px;color:white" class="customfont">Random Food</h1>
+
+    <p style="color:white;font-size:30px">Générateur de recette de cuisine depuis 1890</p>
+    <a class="btn btn-lg btn-outline-inverse btn-default" href="{% url 'gen_recette' %}" role="button">Générer une
+    recette</a>
+    <a class="btn btn-lg btn-outline-inverse btn-default" href="{% url 'home_recette %}" role="button">Voir toutes les
+    recette</a>
+    </p>
+</div>
+{% endblock %}
