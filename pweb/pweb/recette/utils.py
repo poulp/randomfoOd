@@ -54,7 +54,7 @@ class Action(object):
 
 
 class Recipe(object):
-    def __init__(self, dev=False):
+    def __init__(self):
         self.url = "http://localhost:5000/api/v1/recipe/gen"
         self.graph = Graph()
 
@@ -65,15 +65,16 @@ class Recipe(object):
         self.ing1 = ""
         self.ing2 = ""
 
-        self.request(dev)
+        self.data = ""
 
     def request(self, dev=False):
 
         if not dev:
-            headers = {"Accept": "application/xml"}
+            headers = {"Accept": "application/rdf+xml"}
             req = urllib2.Request(self.url, headers=headers)
             response = urllib2.urlopen(req)
-            self.graph.parse(data=response.read(), format="xml")
+            self.data = response.read()
+            self.graph.parse(data=self.data, format="xml")
         else:
             #self.graph.parse(data="dev_rdf.xml", format="xml")
             self.graph.load("pweb/recette/dev_rdf.xml", format="xml")
@@ -99,7 +100,7 @@ class Recipe(object):
 ##### Utils function #####
 def get_utensils():
     """ Return a list who contains all the Utensil objects """
-    headers = {"Accept": "application/xml"}
+    headers = {"Accept": "application/rdf+xml"}
     req = urllib2.Request(GET_UTENSIL_URL, headers=headers)
     response = urllib2.urlopen(req)
     graph = Graph()
@@ -128,7 +129,7 @@ def add_utensil(label):
 
 def get_actions():
     """ Return a list who contains all the Action objects """
-    headers = {"Accept": "application/xml"}
+    headers = {"Accept": "application/rdf+xml"}
     req = urllib2.Request(GET_ACTION_URL, headers=headers)
     response = urllib2.urlopen(req)
     graph = Graph()
