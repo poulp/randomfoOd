@@ -19,6 +19,11 @@
     src: url({{ STATIC_URL }}fonts/oswald.ttf) format("truetype");
     }
 
+    @font-face {
+    font-family: "vibes";
+    src: url({{ STATIC_URL }}fonts/vibes.ttf) format("truetype");
+    }
+
     body, html {
     margin: 0;
     padding: 0;
@@ -26,19 +31,32 @@
     }
 
     #title {
-    padding: 25px;
+    padding: 15px;
+    padding-bottom: 0;
     margin: 0;
     text-align: center;
     font-family: "aleo", Helvetica, sans-serif;
-    font-size: 4em;
+    font-size: 3em;
     color: white;
     -webkit-text-shadow: 0px 1px 1px rgba(50, 50, 50, 0.75);
     -moz-text-shadow: 0px 1px 1px rgba(50, 50, 50, 0.75);
     text-shadow: 0px 1px 1px rgba(50, 50, 50, 0.75);
     }
 
+    #subtitle {
+    padding-bottom: 15px;
+    margin: 0;
+    color: #eeeeee;
+    font-family: vibes;
+    font-size: 1.8em;
+    }
+
     #cakeimg {
-    width: 250px;
+    background-image: url("{{ STATIC_URL }}/img/homeimg.png");
+    display:block;
+    width: 450px;
+    height: 270px;
+    margin: 0 auto;
     }
 
     #top-block {
@@ -46,7 +64,7 @@
     margin 0;
     padding 0;
     width: 100%;
-    height: 350px;
+    height: 280px;
     background-color: #2980b9;
     -webkit-box-shadow: 0px 5px 5px rgba(50, 50, 50, 0.75);
     -moz-box-shadow: 0px 5px 5px rgba(50, 50, 50, 0.75);
@@ -62,7 +80,7 @@
 
     margin 0;
     padding 0;
-    padding-top: 350px;
+    padding-top: 310px;
     background-color: #34495e;
     }
 
@@ -90,13 +108,24 @@
     .block h3 {
     font-family: oswald;
     }
+
+    .button {
+    width:100%;
+    text-align:center;
+    position:absolute;
+    bottom:0;
+    left:0;
+    }
+
 </style>
 <body>
 
 <div id="top-block">
     <h1 id="title">RANDOM FOOD</h1>
 
-    <div id="cake"><img id="cakeimg" src="{{ STATIC_URL }}/img/homeimg.png"></div>
+    <h2 id="subtitle">Tout manger devient possible</h2>
+
+    <div id="cake"><div id="cakeimg"></div></div>
 </div>
 
 <div id="bottom-block" class="container">
@@ -109,11 +138,8 @@
                 Vous rêvez de goûter du pneu ou de siroter de la mélasse, vous ne pouviez pas mieux tomber !
                 Jetez un oeil au coulis de bois de cèdre et dites nous-en des nouvelles.</p>
 
-            <p style="width:100%;text-align:center;position:absolute;bottom:0;left:0;"><a
-                    class="btn btn-lg btn-outline-inverse btn-default" href=""
-                    role="button">
-                Générer une recette
-            </a></p>
+            <p class="button"><a class="btn btn-lg btn-outline-inverse btn-default" href="{% url 'gen_recette' %}" role="button">Générer une
+                recette</a></p>
         </div>
         <div class="block col-md-3">
             <h3 class="block-title">Participez vous aussi</h3>
@@ -122,11 +148,8 @@
                 vous et de votre talent spécial. Faites partager ce don en proposant de nouvaux ustensiles pour de
                 meilleures recettes.</p>
 
-            <p style="width:100%;text-align:center;position:absolute;bottom:0;left:0;"><a
-                    class="btn btn-lg btn-outline-inverse btn-default" href=""
-                    role="button">
-                Contribuer au projet
-            </a></p>
+            <p class="button"><a class="btn btn-lg btn-outline-inverse btn-default" href="{% url 'home_contribute' %}" role="button">Contribuer au
+                projet</a></p>
         </div>
         <div class="block col-md-3">
             <h3 class="block-title">Pour les développeurs</h3>
@@ -135,11 +158,9 @@
                 Profitez-en et connectez vos services quels qu'ils soient à notre API, peu importe votre domaine de
                 travail, si c'est gratuit c'est qu'il faut l'utiliser.</p>
 
-            <p style="width:100%;text-align:center;position:absolute;bottom:0;left:0;"><a
-                    class="btn btn-lg btn-outline-inverse btn-default" href=""
-                    role="button">
-                Doc de l'API
-            </a></p>
+            <p class="button">
+                <a class="btn btn-lg btn-outline-inverse btn-default" href="{% url 'api_doc' %}" role="button">Doc de l'API</a>
+            </p>
         </div>
     </div>
 </div>
