@@ -53,6 +53,27 @@ class Action(object):
         return self.name
 
 
+class Transformation(object):
+    def __init__(self, name, position, utensil, ing):
+        self.name = name
+        self.position = position
+        self.utensil = utensil
+        self.ing = ing
+
+    def __unicode__(self):
+        tmp = u""
+        tmp += self.name + u" le "
+
+        for i, n in enumerate(self.ing):
+            if i == len(self.ing) - 1:
+                tmp += n
+            else:
+                tmp += n + u" et le "
+
+        tmp += u" à l'aide de la " + self.utensil.lower()
+        return tmp
+
+
 class Recipe(object):
     def __init__(self):
         self.url = "http://localhost:5000/api/v1/recipe/gen"
@@ -61,6 +82,7 @@ class Recipe(object):
         self.ingredient = []
         self.utensil = []
         self.nb_person = 0
+        self.transformation = []
 
         self.ing1 = ""
         self.ing2 = ""
@@ -88,7 +110,27 @@ class Recipe(object):
             self.utensil.append(Utensil(s, self.graph.value(s, RDFS.label)))
 
         for s, p, o in self.graph.triples((None, RDF.type, LIRMM.Recipe)):
+            # nombre de personne
             self.nb_person = self.graph.value(s, NS1.nb_person)
+            # transformations d'une recette
+            for a, b, c in self.graph.triples((s, NS1.Transformation, None)):
+                tname = self.graph.value(c, NS1.Action)
+                # impossible de choper le bloc xml lié à l'uri
+                # ceci devrait marcher normalement :
+                #tname = self.graph.value(tname, RDFS.label)
+
+                tposition = self.graph.value(c, RDFS.Literal)
+                tutensil = self.graph.value(self.graph.value(c, NS1.Utensil), RDFS.label)
+
+                ing = []
+                for t, y, u in self.graph.triples((c, NS1.Ingredient, None)):
+                    ing.append(self.graph.value(u, RDFS.label))
+
+                self.transformation.append(Transformation(tname,tposition,tutensil,ing))
+                print "--"
+
+        #reorder transfo by position
+        self.transformation.sort(key=lambda x: x.position, reverse=False)
 
         self.ing1 = choice(self.ingredient)
         self.ing2 = choice(self.ingredient)
@@ -161,9 +203,10 @@ def get_images_from_label(label, limit=100):
             } LIMIT %d
             """ % (label, limit)
     g = SPARQLGraph(url)
-    result = list(g.query(query, resultMethod="json"))
+    #result = list(g.query(query, resultMethod="json"))
 
-    return [img_url[0].toPython() for img_url in result]
+    #return [img_url[0].toPython() for img_url in result]
+    return []
 
 if __name__ == "__main__":
     r = Recipe()

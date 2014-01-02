@@ -36,8 +36,8 @@
                 setImg(id_current_img);
             }
 
-
-            setImg(0);
+            if (list_img.length > 0)
+                setImg(0);
 
             $("#next").click(function(){
                 /* image error handler 
@@ -118,6 +118,15 @@
         <hr style="background-color:red">
     </div>
 </div>
+
+<div class="container">
+    <div class="col-md-12">
+        {% for t in recipe.transformation %}
+        <p>{{ t.position }} {{ t }}</p>
+        {% endfor %}
+    </div>
+</div>
+
 <div class="container">
     <div class="col-md-12">
         <form method="POST" action="{% url "gen_recette" %}">

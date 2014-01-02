@@ -16,8 +16,8 @@ def gen_recette(request):
     if request.method == "POST":
         pass
     else:
-        r.request()
-    
+        r.request(dev=True)
+
     list_img = get_images_from_label(r.ing1.__unicode__())
     c = {
         'recipe': r,
