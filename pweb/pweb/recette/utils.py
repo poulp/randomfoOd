@@ -127,7 +127,6 @@ class Recipe(object):
                     ing.append(self.graph.value(u, RDFS.label))
 
                 self.transformation.append(Transformation(tname,tposition,tutensil,ing))
-                print "--"
 
         #reorder transfo by position
         self.transformation.sort(key=lambda x: x.position, reverse=False)
