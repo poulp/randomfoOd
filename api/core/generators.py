@@ -52,7 +52,8 @@ class IngredientGenerator(object):
 
 class UnitGenerator(object):
     # TODO : extraire les unités d'une autre source, voir http://purl.obolibrary.org/obo/uo.owl
-    units = ('mg', 'kg', 'poignées', 'pincées', 'litres', 'hectolitres', 'mm', 'bonnes doses', 'paquets')
+    units = (u'mg', u'kg', u'poignées', u'pincées', u'litres', u'hectolitres', u'mm', u'bonnes doses', u'paquets',
+             u'cuillerées', u'pelletées', u'centimètres', u'morceaux')
 
     @classmethod
     def generate(cls):
@@ -97,7 +98,7 @@ class ActionGenerator(object):
 
         for utensil in utensils:
             for action in utensil.actions:
-                map(rdfSubject.db.add, graph.triples((URIRef(action), None, None)))
+                map(rdfSubject.db.add, graph.triples((action.resUri, None, None)))
 
 
 class TransformedIngredientGenerator(object):
@@ -107,7 +108,6 @@ class TransformedIngredientGenerator(object):
 
     @classmethod
     def generate(cls, utensils, ingredients):
-        print utensils, ingredients
         transformations = []
 
         while len(ingredients):
@@ -136,6 +136,6 @@ class RecipeGenerator(object):
         n = randint(1, 1000)
         i = IngredientGenerator.generate(randint(5, 10))
         u = UtensilGenerator.generate(randint(3, 6))
-        t = TransformedIngredientGenerator.generate(u, i)
+        t = TransformedIngredientGenerator.generate(u, i) if u else []
 
         return Recipe(person_nb=n, ingredients=i, utensils=u, transformations=t)

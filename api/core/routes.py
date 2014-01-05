@@ -70,7 +70,7 @@ def add_utensil():
     """ Ajouter un ustensile """
     store_file = STORE['utensils']
     label = request.json['label']
-    actions = request.json['actions']
+    actions = [create_uri(uri) for uri in request.json['actions']]
 
     uri = create_uri(BASE_URI_UTENSIL + sanitize(label))
 
