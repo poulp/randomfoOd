@@ -68,6 +68,10 @@
             $("#refresh").click(function(){
                 location.reload();
             });
+
+            $("#form").submit(function(){
+                $("#form_title").attr("value",$("#recipe_title").text());
+            });
         });
     </script>
 {% endblock %}
@@ -75,7 +79,7 @@
 {% block content %}
 <div class="container">
     <div class="col-md-12">
-        <h1>{{ recipe|random_title }}<small> pour {{ recipe.nb_person }} personnes</small></h1>
+        <h1><span id="recipe_title">{{ recipe|random_title }}</span><small> pour {{ recipe.nb_person }} personnes</small></h1>
     </div>
 </div>
 
@@ -129,10 +133,19 @@
 
 <div class="container">
     <div class="col-md-12">
-        <form method="POST" action="{% url "gen_recette" %}">
-            <input type="hidden" name="raw_data" value="{{ r.data }}" />
-            <input type="hidden" name="title" value="" />
-            <button type="submit" class="btn btn-lg btn-success">Sauvegarder</button>
+        <form id="form" method="POST" action="{% url "gen_recette" %}">{% csrf_token %}
+            <input type="hidden" name="raw_data" id="form_raw_data" value="{{ r.data }}" />
+            <input type="hidden" name="title" id="form_title" value="" />
+            {% for ingredient in recipe.ingredient %}
+                <input type="hidden" name="ing" value="{{ ingredient.unit }} {{ ingredient.name|display_ingredient }}{{ ingredient.name }}" />
+            {% endfor %}
+            {% for utensil in recipe.utensil %}
+                <input type="hidden" name="utensil" value="{{ utensil.name }}" />
+            {% endfor %}
+            <input type="hidden" name="nb" id="form_nb" value="{{ recipe.nb_person }}" />
+            {% if user.is_authenticated %}
+                <button type="submit" class="btn btn-lg btn-success">Sauvegarder</button>
+            {% endif %}
         </form>
         <a href="#" id="refresh" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-refresh"></span>
             Recharger la page</a>

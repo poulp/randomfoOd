@@ -115,9 +115,7 @@ class Recipe(object):
             # transformations d'une recette
             for a, b, c in self.graph.triples((s, NS1.Transformation, None)):
                 tname = self.graph.value(c, NS1.Action)
-                # impossible de choper le bloc xml lié à l'uri
-                # ceci devrait marcher normalement :
-                #tname = self.graph.value(tname, RDFS.label)
+                tname = self.graph.value(tname, RDFS.label)
 
                 tposition = self.graph.value(c, RDFS.Literal)
                 tutensil = self.graph.value(self.graph.value(c, NS1.Utensil), RDFS.label)
@@ -202,10 +200,10 @@ def get_images_from_label(label, limit=100):
             } LIMIT %d
             """ % (label, limit)
     g = SPARQLGraph(url)
-    #result = list(g.query(query, resultMethod="json"))
+    result = list(g.query(query, resultMethod="json"))
 
-    #return [img_url[0].toPython() for img_url in result]
-    return []
+    return [img_url[0].toPython() for img_url in result]
+    #return []
 
 if __name__ == "__main__":
     r = Recipe()

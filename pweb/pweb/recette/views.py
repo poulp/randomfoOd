@@ -4,17 +4,26 @@ from forms import AddUtensil
 
 from utils import Recipe, get_utensils, add_utensil, \
     get_actions, get_images_from_label
-
+import models
 
 def home_recette(request):
-    c = {}
+    c = {
+        "recipe" : models.Recipe.objects.all()
+    }
     return render_to_response('recette/home_recette.html', c, RequestContext(request))
 
 
 def gen_recette(request):
     r = Recipe()
     if request.method == "POST":
-        pass
+        recipe = models.Recipe()
+        recipe.title = request.POST.get("title","")
+        recipe.nb_person = request.POST.get("nb","")
+        recipe.user = request.user
+        ingredients = request.POST.getlist("ing","")
+        recipe.ingredients = '*'.join(ingredients)
+        recipe.save()
+        return redirect("/recette/")
     else:
         r.request(dev=False)
 
@@ -25,6 +34,8 @@ def gen_recette(request):
     }
     return render_to_response('recette/gen_recette.html', c, RequestContext(request))
 
+def detail_recette(request, recipe_pk):
+    return render_to_response('recette/detail_recette.html', {}, RequestContext(request))
 
 def home_contribute(request):
     list_utensils = get_utensils()
