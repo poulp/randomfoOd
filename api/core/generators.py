@@ -4,7 +4,7 @@
 from random import randint, choice, sample, shuffle
 from itertools import chain
 
-from rdflib import ConjunctiveGraph, URIRef
+from rdflib import ConjunctiveGraph
 from rdfalchemy.rdfSubject import rdfSubject
 from rdfalchemy.sparql import SPARQLGraph
 

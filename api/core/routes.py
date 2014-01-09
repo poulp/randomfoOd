@@ -1,7 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from urllib2 import unquote
+
 from flask import request, jsonify
+
+from rdflib import Graph
 
 from generators import IngredientGenerator, RecipeGenerator
 from models import Utensil, Action
@@ -96,12 +100,14 @@ def get_utensils():
 @reset_graph
 def sparql_endpoint():
     """ Le endpoint sparql"""
-    pass
+    query = unquote(request.args.get('query'))
 
-    # Non fonctionnel
-    # map(load_rdf_file, STORE.itervalues())
-    # return rdfSubject.db.query(unquote(request.args.get('query')), initNs=NAMESPACES)
-    # return result.serialize()
+    g = Graph()
+
+    for filename in STORE.itervalues():
+        load_rdf_file(filename, g)
+
+    return g.query(query)
 
 
 ##### DOCUMENTATION

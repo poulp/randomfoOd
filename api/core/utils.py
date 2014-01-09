@@ -68,7 +68,7 @@ def reset_graph(fn):
 
 
 ##### AUTRE
-def load_rdf_file(file_name, graph=None):
+def load_rdf_file(filename, graph=None):
     """
     Charge le fichier dans le graphe donné.
     Si aucun graphe n'est donné, charge dans le graphe global.
@@ -78,11 +78,11 @@ def load_rdf_file(file_name, graph=None):
 
     try:
         # On charge le fichier
-        graph.load(file_name, format=RDF_XML)
+        graph.load(filename, format=RDF_XML)
     except SAXParseException:
         # Si le fichier est vide on y sauve un graphe vide.
         graph.db = ConjunctiveGraph()
-        graph.db.serialize(destination=file_name, format=RDF_XML)
+        graph.db.serialize(destination=filename, format=RDF_XML)
 
 
 def get_rdf_graph(graph=None):
@@ -96,7 +96,7 @@ def get_rdf_graph(graph=None):
     return graph.serialize(format=RDF_XML)
 
 
-def save_rdf_file(file_name, graph=None):
+def save_rdf_file(filename, graph=None):
     """
     Sauveagrde le graphe dans le fichier donné.
     Si aucun graphe n'est donné, sauvegarde le graphe global.
@@ -104,7 +104,7 @@ def save_rdf_file(file_name, graph=None):
     if graph is None:
         graph = rdfSubject.db
 
-    graph.serialize(file_name, format=RDF_XML)
+    graph.serialize(filename, format=RDF_XML)
 
 
 def sanitize(sentence):
