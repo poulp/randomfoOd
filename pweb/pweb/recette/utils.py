@@ -2,11 +2,12 @@
 
 import urllib2
 import json
+import random
 
 from rdflib import Graph, Namespace
 from rdflib.namespace import RDF, RDFS
 from random import choice
-from syntax import link_title_recipe
+from syntax import link_title_recipe, link_ingredient
 
 from rdfalchemy.sparql import SPARQLGraph
 
@@ -61,14 +62,17 @@ class Transformation(object):
         self.ing = ing
 
     def __unicode__(self):
+        if self.utensil == "" and self.ing == "":
+            return self.name
+
         tmp = u""
-        tmp += self.name + u" le "
+        tmp += self.name + u" les "
 
         for i, n in enumerate(self.ing):
             if i == len(self.ing) - 1:
-                tmp += n
+                tmp += n[1] + link_ingredient(n[0])
             else:
-                tmp += n + u" et le "
+                tmp += n[1] + link_ingredient(n[0]) + u" et les "
 
         tmp += u" à l'aide de la " + self.utensil.lower()
         return tmp
@@ -122,12 +126,20 @@ class Recipe(object):
 
                 ing = []
                 for t, y, u in self.graph.triples((c, NS1.Ingredient, None)):
-                    ing.append(self.graph.value(u, RDFS.label))
+                    ing.append([self.graph.value(u, RDFS.label),self.graph.value(u, LIRMM.unit)])
 
                 self.transformation.append(Transformation(tname,tposition,tutensil,ing))
 
         #reorder transfo by position
         self.transformation.sort(key=lambda x: x.position, reverse=False)
+
+        #bonus content
+        temps = ["minutes","années","siècles","millénaires","années lumières"]
+        service = ["frais", "chaud", "tiède", "brulant", "gelé", "moisi"]
+        prep_four = "Préchauffer le four à "+str(random.randint(-273,1000))+"°, thermostat "+str(random.randint(-1000,1000))
+        self.transformation.insert(0,Transformation(prep_four,-1,"",""))
+        self.transformation.append(Transformation("Tout faire cuire au four pendant environ "+str(random.randint(1,1000))+" "+random.choice(temps),len(self.transformation),"",""))
+        self.transformation.append(Transformation("Servir le tout très "+random.choice(service), len(self.transformation), "","")) 
 
         self.ing1 = choice(self.ingredient)
         self.ing2 = choice(self.ingredient)
@@ -177,6 +189,7 @@ def get_actions():
 
     for s, p, o in graph.triples((None, RDF.type, NS1.Action)):
         list_actions.append(Action(graph.value(s, RDFS.label)))
+
     return list_actions
 
 
@@ -191,16 +204,18 @@ def get_images_from_label(label, limit=100):
             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX dbpedia-owl: <http://dbpedia.org/ontology/>
             SELECT ?img
-            {
+            {{
                 ?uri rdfs:label ?txt.
-                ?txt bif:contains "%s".
+                ?txt bif:contains "{label}".
                 ?uri foaf:depiction ?img.
-                MINUS { ?uri rdf:type dbpedia-owl:Person . }
+                MINUS {{ ?uri rdf:type dbpedia-owl:Person . }}
 
-            } LIMIT %d
-            """ % (label, limit)
+            }} LIMIT {limit}
+            """
+    print label
+
     g = SPARQLGraph(url)
-    result = list(g.query(query, resultMethod="json"))
+    result = list(g.query(query.format(label=label,limit=limit), resultMethod="json"))
 
     return [img_url[0].toPython() for img_url in result]
     #return []

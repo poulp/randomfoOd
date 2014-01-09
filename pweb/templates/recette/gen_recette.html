@@ -71,6 +71,7 @@
 
             $("#form").submit(function(){
                 $("#form_title").attr("value",$("#recipe_title").text());
+                $("#form_image").attr("value", img.src);
             });
         });
     </script>
@@ -137,12 +138,16 @@
             <input type="hidden" name="raw_data" id="form_raw_data" value="{{ r.data }}" />
             <input type="hidden" name="title" id="form_title" value="" />
             {% for ingredient in recipe.ingredient %}
-                <input type="hidden" name="ing" value="{{ ingredient.unit }} {{ ingredient.name|display_ingredient }}{{ ingredient.name }}" />
+            <input type="hidden" name="ing" value="{{ ingredient.quantity }} {{ ingredient.unit }} {{ ingredient.name|display_ingredient }}" />
             {% endfor %}
             {% for utensil in recipe.utensil %}
                 <input type="hidden" name="utensil" value="{{ utensil.name }}" />
             {% endfor %}
+            {% for t in recipe.transformation %}
+                <input type="hidden" name="transformation" value="{{ t }}" />
+            {% endfor %}
             <input type="hidden" name="nb" id="form_nb" value="{{ recipe.nb_person }}" />
+            <input type="hidden" name="image" id="form_image" value="" />
             {% if user.is_authenticated %}
                 <button type="submit" class="btn btn-lg btn-success">Sauvegarder</button>
             {% endif %}

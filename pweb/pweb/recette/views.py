@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.shortcuts import render_to_response, RequestContext, redirect
+from django.shortcuts import render_to_response, RequestContext, redirect, get_object_or_404
 from forms import AddUtensil
 
 from utils import Recipe, get_utensils, add_utensil, \
@@ -20,8 +20,13 @@ def gen_recette(request):
         recipe.title = request.POST.get("title","")
         recipe.nb_person = request.POST.get("nb","")
         recipe.user = request.user
+        recipe.image = request.POST.get("image","")
         ingredients = request.POST.getlist("ing","")
         recipe.ingredients = '*'.join(ingredients)
+        utensils = request.POST.getlist("utensil","")
+        recipe.utensils = '*'.join(utensils)
+        transformations = request.POST.getlist("transformation","")
+        recipe.transformations = '*'.join(transformations)
         recipe.save()
         return redirect("/recette/")
     else:
@@ -35,7 +40,16 @@ def gen_recette(request):
     return render_to_response('recette/gen_recette.html', c, RequestContext(request))
 
 def detail_recette(request, recipe_pk):
-    return render_to_response('recette/detail_recette.html', {}, RequestContext(request))
+    recipe = get_object_or_404(models.Recipe, pk=int(recipe_pk))
+    image = recipe.image if recipe.image else "http://www.urti.org/images/no-image.gif" 
+    c = {
+        "recipe" : recipe,
+        "ingredients" : recipe.ingredients.split('*'),
+        "utensils" : recipe.utensils.split('*'),
+        "transformations" : recipe.transformations.split('*'),
+        "image" : image,
+    }
+    return render_to_response('recette/detail_recette.html', c, RequestContext(request))
 
 def home_contribute(request):
     list_utensils = get_utensils()
@@ -63,3 +77,9 @@ def utensil_contribute(request):
 
 def add_contribute(request):
     return render_to_response('recette/add_contribute.html', {}, RequestContext(request))
+
+def delete_recette(request, recipe_pk):
+    r = get_object_or_404(models.Recipe, pk=int(recipe_pk))
+    r.delete()
+    return redirect("/recette")
+

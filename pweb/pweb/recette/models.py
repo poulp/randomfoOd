@@ -6,4 +6,6 @@ class Recipe(models.Model):
     nb_person = models.IntegerField(default=0)
     ingredients = models.CharField(max_length=2000, default="")
     utensils = models.CharField(max_length=2000, default="")
+    transformations = models.CharField(max_length=2000, default="")
+    image = models.CharField(max_length=2000, default="")
     user = models.ForeignKey(User)

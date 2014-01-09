@@ -1,5 +1,55 @@
 {% extends "base.html" %}
 
 {% block content %}
-hello
+<div class="container">
+    <div class="col-md-8">
+        <h1>{{ recipe.title }}<small> pour {{ recipe.nb_person }} personnes</small></h1>
+    </div>
+
+    <div class="col-md-2">
+        <p>crée par {{ recipe.user.username }}</p>
+    </div>
+
+    <div class="col-md-2">
+        <a href="/recette/delete/{{ recipe.pk }}" class="btn" >Supprimer</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-4">
+        <div class="container">
+            <div style="padding-top:30px;padding-bottom:20px" id="div_img_recipe">
+                <img src="{{ image }}" width="300" height="300" />
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <h2>Ingrédients</h2>
+        <ul class="list-group">
+            {% for ingredient in ingredients %}
+                <li class="list-group-item">{{ ingredient }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <h2>Ustensiles</h2>
+        <ul class="list-group">
+            {% for utensil in utensils %}
+                <li class="list-group-item">{{ utensil }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-12">
+        <ol>
+        {% for t in transformations %}
+            <li>{{ t }}</li>
+        {% endfor %}
+        </ol>
+    </div>
+</div>
+
 {% endblock %}
