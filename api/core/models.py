@@ -19,6 +19,7 @@ class Ingredient(rdfSubject):
     label = rdfSingle(RDFS.label)
     quantity = rdfSingle(FOOD.quantity)
     unit = rdfSingle(FOOD.unit)
+    origin = rdfSingle(RDFS.seeAlso)
 
 
 class TransformedIngredient(Ingredient):

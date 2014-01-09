@@ -25,6 +25,7 @@ class IngredientGenerator(object):
     """
 
     endpoint = 'wiktionary'
+    origin = u'http://wiktionary.org/wiki/{word}'
     query = """
             SELECT DISTINCT ?label WHERE
             {{
@@ -46,8 +47,10 @@ class IngredientGenerator(object):
         raw_result = list(Endpoints.query(cls.endpoint, cls.query.format(**parameters)))
 
         return [Ingredient(label=r[0],
+                           origin=cls.origin.format(word=r[0]),
                            quantity=randint(1, 200),
-                           unit=UnitGenerator.generate()) for r in raw_result]
+                           unit=UnitGenerator.generate())
+                for r in raw_result]
 
 
 class UnitGenerator(object):
