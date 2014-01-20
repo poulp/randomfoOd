@@ -3,7 +3,7 @@ from django.shortcuts import render_to_response, RequestContext, redirect, get_o
 from forms import AddUtensil
 
 from utils import Recipe, get_utensils, add_utensil, \
-    get_actions, get_images_from_label
+    get_actions, get_images_from_label, add_action
 import models
 
 def home_recette(request):
@@ -66,13 +66,26 @@ def utensil_contribute(request):
         form = AddUtensil(request.POST)
         if form.is_valid():
             if add_utensil(form.cleaned_data["label"]):
-                return redirect("/")
+                return redirect("/recette/contribute")
     else:
         form = AddUtensil()
     c = {
         'form': form,
     }
     return render_to_response('recette/utensil_contribute.html', c, RequestContext(request))
+
+def action_contribute(request):
+    if request.method == 'POST':
+        form = AddUtensil(request.POST)
+        if form.is_valid():
+            if add_action(form.cleaned_data["label"]):
+                return redirect("/recette/contribute")
+    else:
+        form = AddUtensil()
+    c = {
+        'form': form,
+    }
+    return render_to_response('recette/action_contribute.html', c, RequestContext(request))
 
 
 def add_contribute(request):
