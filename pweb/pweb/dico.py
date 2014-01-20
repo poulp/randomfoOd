@@ -10,7 +10,7 @@ class gramary():
 
     def research(self, word):
         queryHTML = 'http://fr.wiktionary.org/wiki/'+word
-        HTMLresponse = urllib2.urlopen(queryHTML)
+        HTMLresponse = urllib2.urlopen(queryHTML.encode(encoding='utf-8'))
         self.root = ET.fromstring(HTMLresponse.read())
         self.find_number()
         self.find_gender()
@@ -27,34 +27,35 @@ class gramary():
                     if len(results) == 2:
                         break
                     try:
-                        print td.find('strong').text
-                        print "coucou 1"
                         results.append(td.find('strong').text)
-                        #self.set_dictionary('singular', td.find('strong').text)
                     except AttributeError:
                         pass
                     try:
-                        print td.find('a').text
-                        print "coucou 2"
                         results.append(td.find('a').text)
-                        #self.set_dictionary('plural', td.find('a').text)
                     except AttributeError:
                         pass
+                if len(results) > 0:
+                    self.set_dictionary('singular',results.pop(0))
+                    self.set_dictionary('plural',results.pop(0))
+                    return 0;
 
-            print results
-            if len(results) > 0:
-                self.set_dictionary('singular',results.pop(0))
-                self.set_dictionary('plural',results.pop(0))
-                return 0
 
         # word was not found in the preceding case.
-        print "recherche alternative"
-        for b in self.root.iter('b'):
+        for ol in self.root.iter('ol'):
             try:
-                print b.find('a').text
-                #self.research()
+                print ol.find('li').find('a').text
+                self.research(ol.find('li').find('a').text)
+                break
             except AttributeError:
                 pass
+
+        #for b in self.root.iter('b'):
+        #    try:
+        #        print b.find('a').text
+        #        self.research(b.find('a').text)
+        #        break;
+        #    except AttributeError:
+        #        pass
 
     def find_gender(self):
         """
@@ -78,10 +79,12 @@ class gramary():
 if __name__ == "__main__":
 ## Exemple d'utilisation ##
     g = gramary()
-    print g.research('enveloppe')
+    #print g.research('enveloppe')
+    #print g.research('tableaux')
+    #print g.research('tableau')
+    print g.research('sucre')
 
 
 
 
-
-    #print g.research('portes')
+    print g.research('fenêtres')
