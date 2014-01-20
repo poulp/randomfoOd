@@ -4,6 +4,8 @@
 
 TODO
 
+api/core/store/*
+
 *.pyc
 *.db
 
