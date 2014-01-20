@@ -12,6 +12,11 @@ class Migration(SchemaMigration):
         db.create_table(u'recette_recipe', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('title', self.gf('django.db.models.fields.CharField')(max_length=200)),
+            ('nb_person', self.gf('django.db.models.fields.IntegerField')(default=0)),
+            ('ingredients', self.gf('django.db.models.fields.CharField')(default='', max_length=2000)),
+            ('utensils', self.gf('django.db.models.fields.CharField')(default='', max_length=2000)),
+            ('transformations', self.gf('django.db.models.fields.CharField')(default='', max_length=2000)),
+            ('image', self.gf('django.db.models.fields.CharField')(default='', max_length=2000)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
         ))
         db.send_create_signal(u'recette', ['Recipe'])
@@ -62,8 +67,13 @@ class Migration(SchemaMigration):
         u'recette.recipe': {
             'Meta': {'object_name': 'Recipe'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'image': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '2000'}),
+            'ingredients': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '2000'}),
+            'nb_person': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"})
+            'transformations': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '2000'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['auth.User']"}),
+            'utensils': ('django.db.models.fields.CharField', [], {'default': "''", 'max_length': '2000'})
         }
     }
 

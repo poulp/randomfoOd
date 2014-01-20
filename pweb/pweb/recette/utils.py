@@ -169,9 +169,10 @@ def add_utensil(label):
         return False
     params = {
         'label': label,
+		'actions' : [],
     }
     data = json.dumps(params)
-    headers = {"Content-Type": "application/json"}
+    headers = {"Content-Type": "application/json", "Accept":"application/json"}
     req = urllib2.Request(ADD_UTENSIL_URL, data, headers)
     urllib2.urlopen(req)
 
