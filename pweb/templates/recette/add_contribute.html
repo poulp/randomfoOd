@@ -6,6 +6,9 @@
 <script src="http://code.jquery.com/jquery-2.0.3.min.js" type="text/javascript" ></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		
+		var uriClick = "";
+
 		function removeEvent(){
 			$(".action").unbind("click");
 		}
@@ -16,11 +19,40 @@
 		});
 
 		$("#save").click(function(){
+			dataj = {};
+			dataj.utensil = uriClick;
+			actions = [];
+			$(".actions").children('a').each(function(item){
+				if ($(this).hasClass("active")){
+					item = {uri:$(this).attr("data-uri")};
+					actions.push(item);
+				}
+			});
+			dataj.actions = actions;
+
+			console.log(dataj);
+
+			$.ajax({
+				type: "POST",
+				url:"http://localhost:8000/recette/contribute/utensil/addactions",
+				data:{
+					utensil: uriClick,
+					dataj: JSON.stringify(dataj)
+				},
+				success: function(data) {
+					console.log("success !!");
+				},
+				error: function(xhr){
+					console.log("error !!");
+				}
+			});
+
 			removeEvent();
 			$(".actions").empty();
 		});
 
 		$(".utensil").click(function(){
+			uriClick = $(this).attr("data-uri");
 			euri = encodeURIComponent($(this).attr("data-uri"));
 				
 			$.ajax({
@@ -91,7 +123,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" id="cancel" class="btn btn-default" data-dismiss="modal">Annuler</button>
-        <button type="button" id="save" class="btn btn-primary">Sauvegarder</button>
+        <button type="button" id="save" class="btn btn-primary" data-dismiss="modal">Sauvegarder</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

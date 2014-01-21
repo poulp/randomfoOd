@@ -4,8 +4,9 @@ from forms import AddUtensil
 from django.http import HttpResponse
 
 from utils import Recipe, get_utensils, add_utensil, \
-    get_actions, get_images_from_label, add_action, get_actions_from_utensil
+    get_actions, get_images_from_label, add_action, get_actions_from_utensil, add_utensil_actions_json
 import urllib2
+from django.views.decorators.csrf import csrf_exempt
 import models
 import json
 
@@ -33,7 +34,7 @@ def gen_recette(request):
         recipe.save()
         return redirect("/recette/")
     else:
-        r.request(dev=True)
+        r.request(dev=False)
 
     list_img = get_images_from_label(r.ing1.__unicode__())
     c = {
@@ -99,6 +100,13 @@ def add_contribute(request):
 		"actions": list_actions,
 	}
 	return render_to_response('recette/add_contribute.html', c, RequestContext(request))
+
+@csrf_exempt
+def add_utensil_actions(request):
+    if request.method == "POST":
+        dataj = request.POST.get('dataj','')
+        add_utensil_actions_json(dataj)
+	return HttpResponse("lol")
 
 def get_all_actions(request):
 	""" retourne toutes les actions au format json """

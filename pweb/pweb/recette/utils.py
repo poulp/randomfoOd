@@ -15,6 +15,7 @@ NS1 = Namespace('http://www.random-food.com/ontology#')
 LIRMM = Namespace('http://data.lirmm.fr/ontologies/food#')
 
 ADD_UTENSIL_URL = "http://localhost:5000/api/v1/utensil/add"
+ADD_UTENSIL_ACTIONS_URL = "http://localhost:5000/api/v1/utensil/addactions"
 ADD_ACTION_URL = "http://localhost:5000/api/v1/action/add"
 GET_UTENSIL_URL = "http://localhost:5000/api/v1/utensil/get"
 GET_UTENSIL_ACTIONS_URL = "http://localhost:5000/api/v1/utensil/get/actions"
@@ -181,6 +182,15 @@ def add_utensil(label):
 
     return True
 
+def add_utensil_actions_json(dataj):
+    """ Add utensil to the store """
+    #data = json.dumps(dataj)
+    headers = {"Content-Type": "application/json", "Accept":"application/json"}
+    req = urllib2.Request(ADD_UTENSIL_ACTIONS_URL, dataj, headers)
+    urllib2.urlopen(req)
+
+    return True
+
 def add_action(label):
 	""" Add action to the store """
 	if label == "":
@@ -269,4 +279,4 @@ def get_images_from_label(label, limit=100):
     #return []
 
 if __name__ == "__main__":
-	print get_actions_from_utensil("http://www.random-food.com/utensil#harpon")
+	print add_utensil_actions_json("lol")

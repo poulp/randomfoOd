@@ -2,10 +2,11 @@
 # -*- coding: utf-8 -*-
 
 from urllib2 import unquote
-
+import json
 from flask import request, jsonify
 
-from rdflib import Graph
+from rdflib import Graph, Namespace, URIRef
+from rdflib.namespace import RDF
 
 from generators import IngredientGenerator, RecipeGenerator
 from models import Utensil, Action
@@ -84,6 +85,30 @@ def add_utensil():
 
     return jsonify({'uri': uri})
 
+@app.route(PREFIX + '/utensil/addactions', methods=['POST'])
+@consumes(JSON)
+@produces(JSON)
+@reset_graph
+def add_utensil_actions():
+    """ Ajouter des actions à un ustensile """
+    NS1 = Namespace('http://www.random-food.com/ontology#')
+    store_file = STORE['utensils']
+    dataj = json.loads(request.data)
+    
+    g = Graph()
+    load_rdf_file(store_file, g)
+    for s, p ,o in g.triples((None, RDF.type, NS1.Utensil)):
+        if s.__str__() == dataj["utensil"]:
+            print s
+            for a, b, c in g.triples((s, NS1.Action,None)):
+                print "remove"
+                g.remove((a, b, c))
+
+            for action in dataj["actions"]:
+                g.add((s, NS1.Action, URIRef(action['uri'])))
+    save_rdf_file(STORE['utensils'], g) 
+
+    return jsonify({'uri': "test"})
 
 @app.route(PREFIX + '/utensil/get/', methods=['GET'])
 @produces(RDF_XML)
