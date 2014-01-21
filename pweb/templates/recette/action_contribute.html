@@ -2,15 +2,13 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="container">
-    <div class="page-header">
-        <h2>Ajouter une action</h2>
+<div class="page-header">
+    <div class="container">
+        <h1>Ajouter une action</h1>
     </div>
 </div>
 
 <div class="container">
-    <div class="col-md-4">
-        {% crispy form %}
-    </div>
+    {% crispy form %}
 </div>
 {% endblock %}

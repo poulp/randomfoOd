@@ -2,6 +2,37 @@ body {
     background-color : #F0F0F0;
 }
 
+.form-add {
+
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+
+}
+
+.form-add input[type="text"] {
+    margin-bottom: -1px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.form-add input[type="submit"] {
+    padding:10px;
+    width: 300px;
+}
+
+.form-add .form-control {
+    position: relative;
+    font-size: 16px;
+    height: auto;
+    padding: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
 .form-signin {
     max-width: 330px;
     padding: 15px;
@@ -72,4 +103,12 @@ body {
     margin-right: 5px;
     text-align: center;
     width: 1.6em; 
+}
+
+.page-header {
+    background-color :#2980B9;
+    margin-top:-40px;
+    padding-top : 20px;
+    padding-bottom : 20px;
+    color : white;
 }

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response, RequestContext, redirect, get_object_or_404
-from forms import AddUtensil
+from forms import AddUtensil, AddAction
 from django.http import HttpResponse
 
 from utils import Recipe, get_utensils, add_utensil, \
@@ -80,12 +80,12 @@ def utensil_contribute(request):
 
 def action_contribute(request):
     if request.method == 'POST':
-        form = AddUtensil(request.POST)
+        form = AddAction(request.POST)
         if form.is_valid():
             if add_action(form.cleaned_data["label"]):
                 return redirect("/recette/contribute")
     else:
-        form = AddUtensil()
+        form = AddAction()
     c = {
         'form': form,
     }

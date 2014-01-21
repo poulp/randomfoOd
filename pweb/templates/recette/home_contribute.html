@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <div class="page-header">
+<div class="page-header">
+    <div class="container">
         <h1>Ajouter des données</h1>
     </div>
 </div>
 
 <div class="container">
     <div class="col-md-6">
-        <div class="panel panel-primary">
+        <div class="panel panel-success">
             <div class="panel-heading">
                 <strong>Ustensiles</strong>
             </div>
@@ -19,14 +19,19 @@
             </div>
             <div class="panel-footer">
                 <div class="container">
-                    <a class="btn btn-lg btn-primary" href="{% url "utensil_contribute" %}" role="button">Ajouter un ustensile</a>
+                    <a class="btn btn-lg btn-success" href="{% url "utensil_contribute" %}" role="button">Ajouter un ustensile</a>
                 </div>
             </div>
-
         </div>
     </div>
     <div class="col-md-6">
-        <div class="panel panel-primary">
+        <img src="http://www.clker.com/cliparts/d/5/0/2/12387028081954057375rugby471_Tango_Style_Frying_Pan.svg.hi.png" height="200"/>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-6">
+        <div class="panel panel-success">
             <div class="panel-heading">
                 <strong>Actions</strong>
             </div>
@@ -37,42 +42,13 @@
             </div>
             <div class="panel-footer">
                 <div class="container">
-                    <a class="btn btn-lg btn-primary" href="{% url "action_contribute" %}" role="button">Ajouter une action</a>
+                    <a class="btn btn-lg btn-success" href="{% url "action_contribute" %}" role="button">Ajouter une action</a>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="container">
     <div class="col-md-6">
-        <table class="table table-striped">
-            <caption>Liste des ustensiles</caption>
-            <tr>
-                <th>Nom</th>
-                <th>URI</th>
-            </tr>
-            {% for utensil in utensils %}
-            <tr>
-                <td>{{ utensil }}</td>
-                <td>{{ utensil.uri }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-    <div class="col-md-6">
-        <table class="table table-striped">
-            <caption>Liste des actions</caption>
-            <tr>
-                <th>Nom</th>
-            </tr>
-            {% for action in actions %}
-            <tr>
-                <td>{{ action }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+        <img src="http://www.clker.com/cliparts/d/5/0/2/12387028081954057375rugby471_Tango_Style_Frying_Pan.svg.hi.png" height="200"/>
     </div>
 </div>
-
 {% endblock %}
