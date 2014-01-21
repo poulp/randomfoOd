@@ -9,7 +9,6 @@ from rdflib import ConjunctiveGraph, URIRef
 from unidecode import unidecode
 from flask import request
 from werkzeug.exceptions import UnsupportedMediaType, NotAcceptable
-
 from constants import RDF_XML
 
 
@@ -119,3 +118,4 @@ def create_uri(uri):
     Renvoie un objet URI manipulable par rdflib et rdfalchemy.
     """
     return URIRef(uri)
+

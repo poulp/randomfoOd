@@ -17,6 +17,7 @@ LIRMM = Namespace('http://data.lirmm.fr/ontologies/food#')
 ADD_UTENSIL_URL = "http://localhost:5000/api/v1/utensil/add"
 ADD_ACTION_URL = "http://localhost:5000/api/v1/action/add"
 GET_UTENSIL_URL = "http://localhost:5000/api/v1/utensil/get"
+GET_UTENSIL_ACTIONS_URL = "http://localhost:5000/api/v1/utensil/get/actions"
 GET_ACTION_URL = "http://localhost:5000/api/v1/action/get"
 
 
@@ -47,8 +48,9 @@ class Utensil(Base):
         return self.name
 
 
-class Action(object):
-    def __init__(self, name):
+class Action(Base):
+    def __init__(self, name, uri):
+        super(Action, self).__init__(uri)
         self.name = name
 
     def __unicode__(self):
@@ -193,7 +195,33 @@ def add_action(label):
 
 	return True
 
-def get_actions():
+def get_actions_from_utensil(label):
+    """ return a list of url's image found by
+        a label query on dbpedia
+    """
+	# actions
+    headers = {"Accept": "application/rdf+xml"}
+    req = urllib2.Request(GET_UTENSIL_URL, headers=headers)
+    response = urllib2.urlopen(req)
+    graph = Graph()
+    graph.parse(data=response.read(), format="xml")
+
+	# actions
+    req = urllib2.Request(GET_ACTION_URL, headers=headers)
+    response = urllib2.urlopen(req)
+    graph_action = Graph()
+    graph_action.parse(data=response.read(), format="xml")
+    list_actions = []
+
+    for s, p, o in graph.triples((None, RDF.type, NS1.Utensil)):
+        if s.__str__() == label:
+            for a, b, c in graph.triples((s, NS1.Action, None)):
+			#	list_actions.append(Action(graph_action.value(c, RDFS.label), c))
+                list_actions.append({"label":graph_action.value(c, RDFS.label),"uri":c.__str__()})
+				
+    return list_actions
+
+def get_actions(json=False):
     """ Return a list who contains all the Action objects """
     headers = {"Accept": "application/rdf+xml"}
     req = urllib2.Request(GET_ACTION_URL, headers=headers)
@@ -203,7 +231,12 @@ def get_actions():
     list_actions = []
 
     for s, p, o in graph.triples((None, RDF.type, NS1.Action)):
-        list_actions.append(Action(graph.value(s, RDFS.label)))
+        if json:
+            print "lol"
+            print s.__str__()
+            list_actions.append({"label":graph.value(s, RDFS.label),"uri":s.__str__()})
+        else:
+            list_actions.append(Action(graph.value(s, RDFS.label), s))
 
     return list_actions
 
@@ -236,5 +269,4 @@ def get_images_from_label(label, limit=100):
     #return []
 
 if __name__ == "__main__":
-    r = Recipe()
-    print r.utensil
+	print get_actions_from_utensil("http://www.random-food.com/utensil#harpon")

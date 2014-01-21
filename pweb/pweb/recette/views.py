@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render_to_response, RequestContext, redirect, get_object_or_404
 from forms import AddUtensil
+from django.http import HttpResponse
 
 from utils import Recipe, get_utensils, add_utensil, \
-    get_actions, get_images_from_label, add_action
+    get_actions, get_images_from_label, add_action, get_actions_from_utensil
+import urllib2
 import models
+import json
 
 def home_recette(request):
     c = {
@@ -89,7 +92,25 @@ def action_contribute(request):
 
 
 def add_contribute(request):
-    return render_to_response('recette/add_contribute.html', {}, RequestContext(request))
+	list_utensils = get_utensils()
+	list_actions = get_actions()
+	c = {
+		"utensils": list_utensils,
+		"actions": list_actions,
+	}
+	return render_to_response('recette/add_contribute.html', c, RequestContext(request))
+
+def get_all_actions(request):
+	""" retourne toutes les actions au format json """
+	return HttpResponse(json.dumps(get_actions(json=True)))
+
+def get_actions_utensil(request):
+	print urllib2.unquote(request.GET['uri'])
+	try:
+		furi = urllib2.unquote(request.GET['uri'])
+	except:
+		furi = ""
+	return HttpResponse(json.dumps(get_actions_from_utensil(furi)))
 
 def delete_recette(request, recipe_pk):
     r = get_object_or_404(models.Recipe, pk=int(recipe_pk))
