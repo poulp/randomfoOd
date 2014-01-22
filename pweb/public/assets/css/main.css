@@ -2,6 +2,13 @@ body {
     background-color : #F0F0F0;
 }
 
+.img-thumb {
+    display: block;
+    max-width: 100px;
+    max-height:200px;
+
+}
+
 .form-add {
 
     max-width: 330px;

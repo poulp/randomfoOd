@@ -1,19 +1,39 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="page-header">
+    <div class="container">
+        <h1>Recette</h1>
+    </div>
+</div>
+
+
 <div class="container">
     <div class="col-md-12">
-        <a href="{% url 'gen_recette' %}" class="btn btn-primary">Générer une recette</a>
+        <a href="{% url 'gen_recette' %}" class="btn btn-lg btn-primary">Générer une recette</a>
     </div>
 </div>
 
 <div class="container">
     <div class="col-md-12">
-        <ul>
-        {% for r in recipe %}
-        <li><a href="{{ r.pk }}">{{ r.title }}</a></li>
-        {% endfor %}
-    </ul>
+        <h2>Dernières recettes ajoutées</h2>
+    </div>
+</div>
+
+<div class="container">
+    {% for r in recipe%}
+        <div class="col-md-3">
+                <a href="/recette/{{ r.pk }}" class="thumbnail">
+                <h4>{{ r.title }}</h4>
+                <img src="{{ r.image }}" class="img-thumb"/>
+                </a>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="container">
+    <div class="col-md-12">
+        <h2>Top des recettes</h2>
     </div>
 </div>
 {% endblock %}

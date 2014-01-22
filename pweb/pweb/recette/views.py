@@ -12,7 +12,7 @@ import json
 
 def home_recette(request):
     c = {
-        "recipe" : models.Recipe.objects.all()
+        "recipe" : models.Recipe.objects.all().order_by('-pk')[:3]
     }
     return render_to_response('recette/home_recette.html', c, RequestContext(request))
 
@@ -34,7 +34,7 @@ def gen_recette(request):
         recipe.save()
         return redirect("/recette/")
     else:
-        r.request(dev=False)
+        r.request(dev=True)
 
     list_img = get_images_from_label(r.ing1.__unicode__())
     c = {
@@ -46,12 +46,16 @@ def gen_recette(request):
 def detail_recette(request, recipe_pk):
     recipe = get_object_or_404(models.Recipe, pk=int(recipe_pk))
     image = recipe.image if recipe.image else "http://www.urti.org/images/no-image.gif" 
+    is_author = False
+    if request.user == recipe.user:
+        is_author = True
     c = {
         "recipe" : recipe,
         "ingredients" : recipe.ingredients.split('*'),
         "utensils" : recipe.utensils.split('*'),
         "transformations" : recipe.transformations.split('*'),
         "image" : image,
+        "is_author": is_author,
     }
     return render_to_response('recette/detail_recette.html', c, RequestContext(request))
 
