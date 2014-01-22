@@ -2,6 +2,7 @@
 from django.shortcuts import render_to_response, RequestContext, redirect, get_object_or_404
 from forms import AddUtensil, AddAction
 from django.http import HttpResponse
+from django.contrib.auth.models import User
 
 from utils import Recipe, get_utensils, add_utensil, \
     get_actions, get_images_from_label, add_action, get_actions_from_utensil, add_utensil_actions_json
@@ -12,7 +13,8 @@ import json
 
 def home_recette(request):
     c = {
-        "recipe" : models.Recipe.objects.all().order_by('-pk')[:3]
+        "recipe" : models.Recipe.objects.all().order_by('-pk')[:3],
+        "recipe_rate" : models.get_top_recipe()
     }
     return render_to_response('recette/home_recette.html', c, RequestContext(request))
 
@@ -56,6 +58,7 @@ def detail_recette(request, recipe_pk):
         "transformations" : recipe.transformations.split('*'),
         "image" : image,
         "is_author": is_author,
+        "total_rate": models.get_total_rate(recipe),
     }
     return render_to_response('recette/detail_recette.html', c, RequestContext(request))
 
@@ -123,6 +126,27 @@ def get_actions_utensil(request):
 	except:
 		furi = ""
 	return HttpResponse(json.dumps(get_actions_from_utensil(furi)))
+
+@csrf_exempt
+def rate_recipe(request):
+    total = 0
+    if request.method == "POST":
+        score = request.POST.get('score', '')
+        user_pk = request.POST.get('user_pk', '')
+        recipe_pk = request.POST.get('recipe_pk', '')
+
+        user = User.objects.get(pk=int(user_pk))
+        recipe = models.Recipe.objects.get(pk=int(recipe_pk))
+
+        try:
+            r = models.Rate.objects.get(user=user, recipe=recipe)
+            r.value = int(score)
+            r.save()
+        except:
+            r = models.Rate(value=int(score), user=user, recipe=recipe)
+            r.save()
+        total = models.get_total_rate(recipe)
+    return HttpResponse(total)
 
 def delete_recette(request, recipe_pk):
     r = get_object_or_404(models.Recipe, pk=int(recipe_pk))

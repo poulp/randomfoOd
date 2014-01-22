@@ -3,11 +3,30 @@
 
 {% block javascript %}
     <script src="http://code.jquery.com/jquery-2.0.3.min.js" type="text/javascript" ></script>
-    <script src="{% static "js/jquery.raty.js" %}" type="text/javascript" ></script>
 
     <script type="text/javascript">
         $(document).ready(function(){
-            $("#rate").raty();
+            $("#rate").raty({
+                score: parseInt({{ total_rate }}),
+                click: function(score, evt){
+                    datap = {
+                        score: score,
+                        user_pk: {{ user.pk }},
+                        recipe_pk: {{ recipe.pk }}
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost:8000/recette/rate",
+                        data: datap,
+                        success: function(data){
+                            console.log("success !!");
+                            console.log(data);
+                        }
+                    });
+                },
+                path: '{{ STATIC_URL }}js/images'
+            });
         });
     </script>
 {% endblock %}

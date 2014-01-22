@@ -15,4 +15,5 @@ urlpatterns = patterns('',
     url(r'^contribute/utensil/actions$', 'pweb.recette.views.get_actions_utensil', name="actions_utensil_contribute"),
     url(r'^contribute/getactions$', 'pweb.recette.views.get_all_actions', name="get_actions_contribute"),
     url(r'^contribute/utensil/addactions$', 'pweb.recette.views.add_utensil_actions', name="add_utensil_actions_contribute"),
+    url(r'^rate$', 'pweb.recette.views.rate_recipe', name="rate_recipe"),
 )

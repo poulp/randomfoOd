@@ -1,5 +1,21 @@
 {% extends "base.html" %}
 
+{% block javascript %}
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js" type="text/javascript" ></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $(".rate").raty({
+                score: function(){
+                    return parseInt($(this).attr('data-rate'));
+                },
+                readOnly: true,
+                path: "{{ STATIC_URL }}js/images", 
+           }); 
+        });
+    </script>
+{% endblock %}
+
 {% block content %}
 <div class="page-header">
     <div class="container">
@@ -25,6 +41,7 @@
         <div class="col-md-3">
                 <a href="/recette/{{ r.pk }}" class="thumbnail">
                 <h4>{{ r.title }}</h4>
+                <div class="rate" data-rate={{ r.get_rate }}></div>
                 <img src="{{ r.image }}" class="img-thumb"/>
                 </a>
         </div>
@@ -36,4 +53,17 @@
         <h2>Top des recettes</h2>
     </div>
 </div>
+
+<div class="container">
+    {% for r in recipe_rate %}
+        <div class="col-md-3">
+                <a href="/recette/{{ r.pk }}" class="thumbnail">
+                <h4>{{ r.title }}</h4>
+                <div class="rate" data-rate={{ r.get_rate }}></div>
+                <img src="{{ r.image }}" class="img-thumb"/>
+                </a>
+        </div>
+    {% endfor %}
+</div>
+
 {% endblock %}
