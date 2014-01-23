@@ -144,6 +144,8 @@ class Recipe(object):
         self.transformation.insert(0,Transformation(prep_four,-1,"",""))
         self.transformation.append(Transformation("Tout faire cuire au four pendant environ "+str(random.randint(1,1000))+" "+random.choice(temps),len(self.transformation),"",""))
         self.transformation.append(Transformation("Servir le tout très "+random.choice(service), len(self.transformation), "","")) 
+        for el in enumerate(self.transformation):
+            self.transformation[el[0]].position = el[0]
 
         self.ing1 = choice(self.ingredient)
         self.ing2 = choice(self.ingredient)

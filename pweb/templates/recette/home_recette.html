@@ -25,8 +25,17 @@
 
 
 <div class="container">
-    <div class="col-md-12">
+    <div class="col-md-6" style="background-color:white;padding:10px;border-radius:10px;" class="info">
+        <p>Générez des recettes toujours plus novatrices et inattendues. Vous rêvez de goûter du pneu ou de siroter de la mélasse, vous ne pouviez pas mieux tomber ! Jetez un oeil au coulis de bois de cèdre et dites nous-en des nouvelles.</p>
         <a href="{% url 'gen_recette' %}" class="btn btn-lg btn-primary">Générer une recette</a>
+    </div>
+    <div class="col-md-4">
+        <h3>Top membres</h3>
+        <ul class="list-group">
+            {% for m in top_member %}
+                <li class="list-group-item"><span class="badge">{{ m.c_recipe }}</span>{{ m.username }}</li>
+            {% endfor %}
+        </ul>
     </div>
 </div>
 

@@ -3,6 +3,7 @@ from django.shortcuts import render_to_response, RequestContext, redirect, get_o
 from forms import AddUtensil, AddAction
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.db.models import Count
 
 from utils import Recipe, get_utensils, add_utensil, \
     get_actions, get_images_from_label, add_action, get_actions_from_utensil, add_utensil_actions_json
@@ -14,7 +15,8 @@ import json
 def home_recette(request):
     c = {
         "recipe" : models.Recipe.objects.all().order_by('-pk')[:3],
-        "recipe_rate" : models.get_top_recipe()
+        "recipe_rate" : models.get_top_recipe(),
+        "top_member": User.objects.annotate(c_recipe=Count('recipe'))
     }
     return render_to_response('recette/home_recette.html', c, RequestContext(request))
 

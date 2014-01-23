@@ -132,8 +132,8 @@
     </div>
 </div>
 
-<div class="container">
-    <div class="col-md-12">
+<div class="container" style="margin-bottom:20px">
+    <div class="col-md-3">
         <form id="form" method="POST" action="{% url "gen_recette" %}">{% csrf_token %}
             <input type="hidden" name="raw_data" id="form_raw_data" value="{{ r.data }}" />
             <input type="hidden" name="title" id="form_title" value="" />
@@ -152,6 +152,8 @@
                 <button type="submit" class="btn btn-lg btn-success">Sauvegarder</button>
             {% endif %}
         </form>
+    </div>
+    <div class="col-md-3">
         <a href="#" id="refresh" class="btn btn-lg btn-default"><span class="glyphicon glyphicon-refresh"></span>
             Recharger la page</a>
     </div>
