@@ -33,6 +33,6 @@ def get_total_rate(recipe):
         return total["value__avg"]
 
 def get_top_recipe():
-    top = Recipe.objects.annotate(top=Avg('rate__value')).order_by('-top')
+    top = Recipe.objects.annotate(top=Avg('rate__value')).order_by('-top')[:4]
     return top
     

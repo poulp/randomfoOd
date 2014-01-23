@@ -40,13 +40,21 @@ class IngredientGenerator(object):
             }}
             OFFSET {offset} LIMIT {number}
             """
+    endpoint2 = 'localhost'
+    query2 = """
+            SELECT ?i WHERE {
+                ?s <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> food:FoodProduct .
+                ?s food:name ?i .
+                FILTER(str(?i) != "")
+            } LIMIT 10
+             """
 
     @classmethod
     def generate(cls, number):
         parameters = {'offset': randint(0, 10000), 'number': number}
-        raw_result = list(Endpoints.query(cls.endpoint, cls.query.format(**parameters)))
+        raw_result = list(Endpoints.query(cls.endpoint2, cls.query2))
 
-        return [Ingredient(label=r[0],
+        return [Ingredient(label=r[0] or "bonjour",
                            origin=cls.origin.format(word=r[0]),
                            quantity=randint(1, 200),
                            unit=UnitGenerator.generate())

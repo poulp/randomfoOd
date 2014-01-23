@@ -274,11 +274,11 @@ def get_images_from_label(label, limit=100):
             """
     print label
 
-    g = SPARQLGraph(url)
-    result = list(g.query(query.format(label=label,limit=limit), resultMethod="json"))
+    #g = SPARQLGraph(url)
+    #result = list(g.query(query.format(label=label,limit=limit), resultMethod="json"))
 
-    return [img_url[0].toPython() for img_url in result]
-    #return []
+    #return [img_url[0].toPython() for img_url in result]
+    return []
 
 if __name__ == "__main__":
 	print add_utensil_actions_json("lol")

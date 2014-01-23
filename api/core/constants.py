@@ -19,7 +19,8 @@ NAMESPACES = {
 }
 
 SPARQL_ENDPOINTS = {
-    'wiktionary': 'http://wiktionary.dbpedia.org/sparql'
+    'wiktionary': 'http://wiktionary.dbpedia.org/sparql',
+    'localhost': 'http://localhost:9091/sparql'
 }
 
 STORE = {

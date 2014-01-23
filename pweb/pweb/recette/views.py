@@ -38,7 +38,7 @@ def gen_recette(request):
         recipe.save()
         return redirect("/recette/")
     else:
-        r.request(dev=True)
+        r.request(dev=False)
 
     list_img = get_images_from_label(r.ing1.__unicode__())
     c = {

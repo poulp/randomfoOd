@@ -23,6 +23,7 @@ PREFIX = '/api/v1'
 #@reset_graph
 def gen_ingredients(number):
     """ Génère <number> ingrédients """
+    print IngredientGenerator.generate(number)
     IngredientGenerator.generate(number)
     return get_rdf_graph()
 
