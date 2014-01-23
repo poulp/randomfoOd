@@ -10,7 +10,7 @@ from rdflib.namespace import RDF
 
 from generators import IngredientGenerator, RecipeGenerator
 from models import Utensil, Action
-from constants import STORE, BASE_URI_ACTION, BASE_URI_UTENSIL, JSON, RDF_XML
+from constants import STORE, BASE_URI_ACTION, BASE_URI_UTENSIL, JSON, RDF_XML, XML, IMAGE_JPEG
 from utils import reset_graph, load_rdf_file, save_rdf_file, get_rdf_graph, sanitize, produces, consumes, create_uri
 from . import app
 
@@ -137,6 +137,20 @@ def sparql_endpoint():
 
 
 ##### DOCUMENTATION
+@app.route(PREFIX + '/doc/ontology', methods=['GET'])
+@produces(XML)
+def ontology():
+    """ L'ontologie des données """
+
+    return open(STORE['ontology']).readlines()
+
+@app.route(PREFIX + '/doc/ontology/img', methods=['GET'])
+#@produces(IMAGE_JPEG)
+def ontology_img():
+    """ Graphe ontologie """
+
+    return open(STORE['ontology_jpg']).read()
+    
 @app.route(PREFIX + '/doc', methods=['GET'])
 def doc():
     """ Affiche la liste des routes disponibles"""

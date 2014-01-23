@@ -4,20 +4,27 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
 >
-  <rdf:Description rdf:about="http://www.random-food.com/utensil#harpon">
-    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
-    <ns1:Action rdf:resource="http://www.random-food.com/recipe#arracher"/>
-    <rdfs:label>Harpon</rdfs:label>
-  </rdf:Description>
   <rdf:Description rdf:about="http://www.random-food.com/utensil#couteau_a_beurre">
-    <ns1:Action rdf:resource="http://www.random-food.com/recipe#decouper"/>
-    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
-    <rdfs:label>Couteau à beurre</rdfs:label>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://www.random-food.com/utensil#masse_darmes">
-    <rdfs:label>Masse d'armes</rdfs:label>
-    <ns1:Action rdf:resource="http://www.random-food.com/recipe#arracher"/>
     <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
     <ns1:Action rdf:resource="http://www.random-food.com/recipe#fracasser"/>
+    <rdfs:label>Couteau à beurre</rdfs:label>
+    <ns1:Action rdf:resource="http://www.random-food.com/recipe#decouper"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random-food.com/utensil#masse_darmes">
+    <ns1:Action rdf:resource="http://www.random-food.com/recipe#fracasser"/>
+    <rdfs:label>Masse d'armes</rdfs:label>
+    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
+    <ns1:Action rdf:resource="http://www.random-food.com/recipe#arracher"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random-food.com/utensil#massue">
+    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
+    <ns1:Action rdf:resource="http://www.random-food.com/recipe#arracher"/>
+    <rdfs:label>Massue</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://www.random-food.com/utensil#harpon">
+    <ns1:Action rdf:resource="http://www.random-food.com/recipe#murmurer"/>
+    <rdfs:label>Harpon</rdfs:label>
+    <ns1:Action rdf:resource="http://www.random-food.com/recipe#arracher"/>
+    <rdf:type rdf:resource="http://www.random-food.com/ontology#Utensil"/>
   </rdf:Description>
 </rdf:RDF>

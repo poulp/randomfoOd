@@ -6,6 +6,8 @@ SITE_ROOT = os.path.realpath(os.path.dirname(os.path.dirname(__file__)))
 
 RDF_XML = 'application/rdf+xml'
 JSON = 'application/json'
+XML = 'application/xml'
+IMAGE_JPEG = 'image/jpeg'
 
 BASE_URI = 'http://www.random-food.com/'
 BASE_URI_UTENSIL = BASE_URI + 'utensil#'
@@ -24,6 +26,8 @@ SPARQL_ENDPOINTS = {
 }
 
 STORE = {
+	'ontology': os.path.join(SITE_ROOT, 'core/store/ontology.owl'),
+	'ontology_jpg': os.path.join(SITE_ROOT, 'core/store/ontology.jpg'),
     'utensils': os.path.join(SITE_ROOT, 'core/store/utensils.rdf'),
     'actions':  os.path.join(SITE_ROOT, 'core/store/actions.rdf')
 }
