@@ -20,7 +20,7 @@ PREFIX = '/api/v1'
 ##### INGREDIENTS
 @app.route(PREFIX + '/ingredient/gen/<int:number>', methods=['GET'])
 @produces(RDF_XML)
-#@reset_graph
+@reset_graph
 def gen_ingredients(number):
     """ Génère <number> ingrédients """
     print IngredientGenerator.generate(number)
