@@ -51,7 +51,11 @@
                 <a href="/recette/{{ r.pk }}" class="thumbnail">
                 <h4>{{ r.title }}</h4>
                 <div class="rate" data-rate={{ r.get_rate }}></div>
-                <img src="{{ r.image }}" class="img-thumb"/>
+                {% ifequal r.image "" %}
+                    <img src="http://www.urti.org/images/no-image.gif" class="img-thumb"/>
+                {% else %}
+                    <img src="{{ r.image }}" class="img-thumb"/>
+                {% endifequal %}
                 </a>
         </div>
     {% endfor %}
@@ -69,7 +73,12 @@
                 <a href="/recette/{{ r.pk }}" class="thumbnail">
                 <h4>{{ r.title }}</h4>
                 <div class="rate" data-rate={{ r.get_rate }}></div>
-                <img src="{{ r.image }}" class="img-thumb"/>
+                {% ifequal r.image "" %}
+                    <img src="http://www.urti.org/images/no-image.gif" class="img-thumb"/>
+                {% else %}
+                    <img src="{{ r.image }}" class="img-thumb"/>
+                {% endifequal %}
+
                 </a>
         </div>
     {% endfor %}

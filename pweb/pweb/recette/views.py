@@ -14,7 +14,7 @@ import json
 
 def home_recette(request):
     c = {
-        "recipe" : models.Recipe.objects.all().order_by('-pk')[:3],
+        "recipe" : models.Recipe.objects.all().order_by('-pk')[:4],
         "recipe_rate" : models.get_top_recipe(),
         "top_member": User.objects.annotate(c_recipe=Count('recipe'))
     }
